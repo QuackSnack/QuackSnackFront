@@ -2,6 +2,8 @@
 
 This project contains the frontend of a web-application that propose the typical services of any food chain. This project is purely educational.
 
+Click here to see the [backend](https://github.com/GregoryHue/srfcBack)
+
 # Setup
 
 This setup was made on a Debian 11 distro, using the Windows 11 WSL.

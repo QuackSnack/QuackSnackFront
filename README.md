@@ -2,7 +2,7 @@
 
 This project contains the frontend of a web-application that propose the typical services of any food chain. This project is purely educational.
 
-Click here to see the [backend](https://github.com/GregoryHue/srfcBack)
+Click here to see the [backend](https://github.com/GregoryHue/srfcBack).
 
 # Setup
 
@@ -32,3 +32,16 @@ Versions :
 * Nodejs v12.22.5
 * Npm 7.5.2
 * Vue CLI 5.0.4
+
+## Structure
+
+The structure of the project needs to respect the following :
+
+```
+main/
+    subfolders/
+    subfiles.ext
+.gitignore
+LICENSE
+LICENSE.md
+```

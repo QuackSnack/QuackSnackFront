@@ -1,12 +1,13 @@
 # Description
 
-This project contains the frontend of a web-application that propose the typical services of any food chain. This project is purely educational.
+This project contains the frontend of a web-application called **FoodDistribution** that propose the typical services of any food chain. This project and the web-application is made purely as an educationnal purpose.
 
-Click here to see the [backend](https://github.com/GregoryHue/srfcBack).
+Click here to see the [backend](https://github.com/GregoryHue/FoodDistributionBack).
 
 # Setup
 
-This setup was made on a Debian 11 distro, using the Windows 11 WSL.
+This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/FoodDistributionFront`.
+
 
 ## Dependencies
 

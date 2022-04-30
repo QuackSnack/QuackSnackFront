@@ -1,4 +1,4 @@
-# srfcfront
+# front
 
 ## Project setup
 ```

@@ -4,22 +4,28 @@ This project contains the frontend of a web-application called **FoodDistributio
 
 Click here to see the [backend](https://github.com/GregoryHue/FoodDistributionBack).
 
+
 # Setup
 
 This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/FoodDistributionFront`.
 
-To facilitate the setup and project management, a shell is proposed. Get in the folder `/home/user/dev/FoodDistributionFront` and use the command :
+## By using a shell (installs both project)
+
+To facilitate the setup and project management, a shell is proposed in both projects. Pull this project, get in the folder `/home/user/dev/FoodDistributionFront` and use the command :
 
 ```
 source fd-shell.sh; fd-install
 ```
 
-This will install the shell in your `~/.bashrc` file. The shell includes the following command :
+This will install the shell in your `~/.bashrc` file. The shell includes the following commands :
 
-* `fd-project` : pull and setup the `front` or the `back` or `both`.
-* `fd-front` : `starts` or `build` the frontend of the application
-* `fd-back` : `starts` the backend of the application or `miragte` the database.
-* `fd-both` : `starts` the frontend and backend in two new terminals.
+
+* `fd-install` : install the shell in `~/.bashrc`.
+* `fd-remove` : remove the shell in `~/.bashrc`.
+* `fd-project` : pull and setup the frontend or the backend or both.
+* `fd-front` : start or build the frontend of the application.
+* `fd-back` : start the backend of the application or migrate the database.
+* `fd-both` : start the frontend and backend in two new terminals.
 
 For a quick installation, use :
 
@@ -29,7 +35,15 @@ fd-project both && fd-back migrate && fd-both start
 
 This should pull and setup both projects, then start them.
 
-## Dependencies
+If you wish to remove the shell, use this command from any folder :
+
+```
+fd-remove
+```
+
+You may need to relog into your session so that it takes effect.
+
+## By installing dependencies manually (installs only the current project)
 
 Update your packages :
 

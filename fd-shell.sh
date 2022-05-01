@@ -46,6 +46,7 @@ function fd-project() {
     sudo apt install python3 python3-pip postgresql postgresql-contrib nodejs npm dbus-x11 gnome-terminal
     sudo service postregsql restart
     python3 -m pip install Django
+    npm install -g @vue/cli
     mkdir -p $HOME/dev
     cd $HOME/dev
     if [ -n "$1" ] && [ "$1" == "front" ]; then
@@ -72,5 +73,19 @@ function fd-install() {
         cat ./fd-shell.sh >> ~/.bashrc
     fi 
 }
+
+function fd-remove() {
+    if grep -Fxq "# fd-shell begin" ~/.bashrc
+    then
+        printf  "${CYAN}removing fd-shell${NC}\n"
+        sed -i '/^# fd-shell begin/,/^# fd-shell end/{/^# fd-shell begin/!{/^# fd-shell end/!d}}' ~/.bashrc
+        sed -i '/^# fd-shell begin/d' ~/.bashrc
+        sed -i '/^# fd-shell end/d'  ~/.bashrc
+    else
+        printf  "${RED}fd-shell is not installed${NC}\n"
+    fi 
+}
+
+
 
 # fd-shell end

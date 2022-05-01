@@ -8,6 +8,7 @@ Click here to see the [backend](https://github.com/GregoryHue/FoodDistributionBa
 
 This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/FoodDistributionFront`.
 
+To facilitate the setup and project management, a shell is proposed [here](https://github.com/GregoryHue/FoodDistributionShell).
 
 ## Dependencies
 

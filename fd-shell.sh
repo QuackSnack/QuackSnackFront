@@ -59,6 +59,8 @@ function fd-project() {
         printf  "${CYAN}pulling front and back${NC}\n"
         git clone git@github.com:GregoryHue/FoodDistributionFront.git
         git clone git@github.com:GregoryHue/FoodDistributionBack.git
+        cd FoodDistributionFront/front
+        npm install
     else
         printf  "${CYAN}front / back / both${NC}\n"
     fi

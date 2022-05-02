@@ -46,6 +46,8 @@ function fd-project() {
     sudo apt install python3 python3-pip postgresql postgresql-contrib nodejs npm dbus-x11 gnome-terminal
     sudo service postregsql restart
     python3 -m pip install Django
+    npm install n -g
+    n stable
     npm install -g @vue/cli
     mkdir -p $HOME/dev
     cd $HOME/dev
@@ -87,7 +89,5 @@ function fd-remove() {
         printf  "${RED}fd-shell is not installed${NC}\n"
     fi 
 }
-
-
 
 # fd-shell end

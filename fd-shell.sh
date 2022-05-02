@@ -46,9 +46,10 @@ function fd-project() {
     sudo apt install python3 python3-pip postgresql postgresql-contrib nodejs npm dbus-x11 gnome-terminal
     sudo service postregsql restart
     sudo python3 -m pip install Django
-    sudo npm install n -g
-    sudo n stable
+    sudo npm update -g npm
     sudo npm install -g @vue/cli
+    sudo npm install -g n
+    sudo n stable
     mkdir -p $HOME/dev
     cd $HOME/dev
     if [ -n "$1" ] && [ "$1" == "front" ]; then

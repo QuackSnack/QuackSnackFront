@@ -1,7 +1,7 @@
 image: node:16.15.0
 
 stages:          # List of stages for jobs, and their order of execution
-    - deploy
+  - deploy
 
 cache:
   paths:
@@ -18,8 +18,8 @@ build-job:       # This job runs in the build stage, which runs first.
     - mkdir public
     - cp -r front/dist/* public
   artifacts:
-  expire_in: 1 day
-  paths:
+    expire_in: 1 day
+    paths:
     - public
   only:
     - main

@@ -1,15 +1,14 @@
 image: node:16.15.0
 
 stages:          # List of stages for jobs, and their order of execution
-  - build
-  - deploy
+    - deploy
 
 cache:
   paths:
     - front/node_modules/
 
 build-job:       # This job runs in the build stage, which runs first.
-  stage: build
+  stage: deploy
   script:
     - cd front/
     - npm install
@@ -18,3 +17,9 @@ build-job:       # This job runs in the build stage, which runs first.
     - cd  ../
     - mkdir public
     - cp -r front/dist/* public
+  artifacts:
+  expire_in: 1 day
+  paths:
+    - public
+  only:
+    - main

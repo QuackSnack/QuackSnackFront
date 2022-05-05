@@ -20,5 +20,5 @@ build-job:       # This job runs in the build stage, which runs first.
     - git config --global user.name "Gregory"
     - git add .
     - git commit -m 'deploy'
-    - git push -f git@github.com:GregoryHue/GregoryHue.github.io.git deploy
+    - git push -f git@gitlab.com:GregoryHue/FoodDistributionFront.git deploy
 

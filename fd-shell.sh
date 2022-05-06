@@ -1,3 +1,4 @@
+
 # fd-shell begin
 
 #!/bin/bash
@@ -24,27 +25,38 @@ function fd-back() {
         python3 $HOME/dev/FoodDistributionBack/back/manage.py runserver
     elif [ -n "$1" ] && [ "$1" == "migrate" ]; then
         printf  "${CYAN}migrating backend${NC}\n"
+        python3 $HOME/dev/FoodDistributionBack/back/manage.py makemigrations
         python3 $HOME/dev/FoodDistributionBack/back/manage.py migrate
     else
         printf  "${CYAN}start / migrate${NC}\n"
     fi
 }
 
-function fd-both() {
-    if [ -n "$1" ] && [ "$1" == "start" ]; then
-        printf  "${CYAN}starting frontend and backend${NC}\n"
-        gnome-terminal --tab -- python3 $HOME/dev/FoodDistributionBack/back/manage.py runserver
-        gnome-terminal --tab -- npm run --prefix $HOME/dev/FoodDistributionFront/front/ serve
+function fd-database() {
+    declare DATABASE_NAME="fd_database"
+
+    if [ -n "$1" ] && [ "$1" == "create" ]; then
+        printf  "${CYAN}creating database${NC}\n"
+        sudo apt-get update
+        sudo service postgresql restart
+        sudo -u postgres createdb $DATABASE_NAME -e
+        sudo -u postgres psql -d $DATABASE_NAME -c "create user fd_user with encrypted password 'fd_password';"
+        sudo -u postgres psql -d $DATABASE_NAME -c "grant all privileges on database $DATABASE_NAME to fd_user;"
+    elif [ -n "$1" ] && [ "$1" == "drop" ]; then
+        printf  "${CYAN}dropping database & user${NC}\n"
+        sudo -u postgres psql -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DATABASE_NAME';"
+        sudo -u postgres dropdb $DATABASE_NAME -e
+        sudo -u postgres dropuser fd_user -e
     else
-        printf  "${CYAN}start / migrate${NC}\n"
+        printf  "${CYAN}create / drop${NC}\n"
     fi
 }
 
-function fd-project() {
+function fd-projects() {
     sudo apt update
     sudo apt upgrade
-    sudo apt install python3 python3-pip postgresql postgresql-contrib nodejs npm dbus-x11 gnome-terminal
-    sudo service postregsql restart
+    sudo apt install python3 python3-pip postgresql postgresql-contrib libpq-dev psycopg2 nodejs npm dbus-x11 gnome-terminal
+    sudo service postgresql restart
     sudo python3 -m pip install Django
     sudo npm update -g npm
     sudo npm install -g @vue/cli
@@ -69,16 +81,6 @@ function fd-project() {
     fi
 }
 
-function fd-install() {
-    if grep -Fxq "# fd-shell begin" ~/.bashrc
-    then
-        printf  "${RED}fd-shell is already installed${NC}\n"
-    else
-        printf  "${CYAN}installing fd-shell${NC}\n"
-        cat ./fd-shell.sh >> ~/.bashrc
-    fi 
-}
-
 function fd-remove() {
     if grep -Fxq "# fd-shell begin" ~/.bashrc
     then
@@ -88,6 +90,19 @@ function fd-remove() {
         sed -i '/^# fd-shell end/d'  ~/.bashrc
     else
         printf  "${RED}fd-shell is not installed${NC}\n"
+    fi 
+}
+
+function fd-install() {
+    if grep -Fxq "# fd-shell begin" ~/.bashrc
+    then
+        printf  "${RED}fd-shell is already installed${NC}\n"
+        fd-remove
+        printf  "${CYAN}re-installing fd-shell${NC}\n"
+        cat ./fd-shell.sh >> ~/.bashrc
+    else
+        printf  "${CYAN}installing fd-shell${NC}\n"
+        cat ./fd-shell.sh >> ~/.bashrc
     fi 
 }
 

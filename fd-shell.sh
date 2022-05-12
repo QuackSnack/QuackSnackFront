@@ -1,7 +1,4 @@
-
 # fd-shell begin
-
-#!/bin/bash
 
 RED='\033[0;31m'
 CYAN='\033[0;36m'
@@ -55,11 +52,11 @@ function fd-database() {
 function fd-projects() {
     sudo apt update
     sudo apt upgrade
-    sudo apt install python3 python3-pip postgresql postgresql-contrib libpq-dev psycopg2 nodejs npm dbus-x11 gnome-terminal
+    sudo apt install python3 python3-pip postgresql postgresql-contrib libpq-dev psycopg2 nodejs npm
     sudo service postgresql restart
     sudo python3 -m pip install Django
     sudo npm update -g npm
-    sudo npm install -g @vue/cli
+    
     sudo npm install -g n
     sudo n stable
     mkdir -p $HOME/dev
@@ -82,28 +79,27 @@ function fd-projects() {
 }
 
 function fd-remove() {
-    if grep -Fxq "# fd-shell begin" ~/.bashrc
+    if grep -Fxq "source ~/.fd-bashrc" ~/.bashrc
     then
         printf  "${CYAN}removing fd-shell${NC}\n"
-        sed -i '/^# fd-shell begin/,/^# fd-shell end/{/^# fd-shell begin/!{/^# fd-shell end/!d}}' ~/.bashrc
-        sed -i '/^# fd-shell begin/d' ~/.bashrc
-        sed -i '/^# fd-shell end/d'  ~/.bashrc
+        rm ~/.fd-bashrc
+        sed -i '/^source ~\/\.fd-bashrc/d'  ~/.bashrc
     else
         printf  "${RED}fd-shell is not installed${NC}\n"
     fi 
 }
 
 function fd-install() {
-    if grep -Fxq "# fd-shell begin" ~/.bashrc
+    if grep -Fxq "source ~/.fd-bashrc" ~/.bashrc
     then
         printf  "${RED}fd-shell is already installed${NC}\n"
         fd-remove
         printf  "${CYAN}re-installing fd-shell${NC}\n"
-        cat ./fd-shell.sh >> ~/.bashrc
+        cat ./fd-shell.sh >> ~/.fd-bashrc
+        printf  "\nsource ~/.fd-bashrc" >> ~/.bashrc
     else
         printf  "${CYAN}installing fd-shell${NC}\n"
-        cat ./fd-shell.sh >> ~/.bashrc
+        cat ./fd-shell.sh >> ~/.fd-bashrc
+        printf  "\nsource ~/.fd-bashrc" >> ~/.bashrc
     fi 
 }
-
-# fd-shell end

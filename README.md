@@ -9,31 +9,24 @@ Click here to see the [backend](https://github.com/GregoryHue/FoodDistributionBa
 
 This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/FoodDistributionFront`.
 
-## By using a shell (installs both project)
+## By using a shell
 
-To facilitate the setup and project management, a shell is proposed in both projects. Pull this project, get in the folder `/home/user/dev/FoodDistributionFront` and use the command :
+To facilitate the setup and project management, the same shell is proposed in both projects. Use this command to create a folder, pull the project inside of it, then make a quick install with the shell :
 
-```
-source fd-shell.sh; fd-install
+```bash
+cd
+mkdir dev
+cd dev
+git clone https://gitlab.com/GregoryHue/FoodDistributionBack.git
+cd FoodDistributionFront
+source fd-shell.sh; fd-quick-install
 ```
 
 This will install the shell in your `~/.bashrc` file. The shell includes the following commands :
 
-
 * `fd-install` : install the shell in `~/.bashrc`.
 * `fd-remove` : remove the shell in `~/.bashrc`.
-* `fd-project` : pull and setup the frontend or the backend or both.
-* `fd-front` : start or build the frontend of the application.
-* `fd-back` : start the backend of the application or migrate the database.
-* `fd-both` : start the frontend and backend in two new terminals.
-
-For a quick installation, use :
-
-```
-fd-project both && fd-back migrate && fd-both start
-```
-
-This should pull and setup both projects, then start them.
+* `fd-projects` : pull every projects.
 
 If you wish to remove the shell, use this command from any folder :
 
@@ -43,7 +36,7 @@ fd-remove
 
 You may need to relog into your session so that it takes effect.
 
-## By installing dependencies manually (installs only the current project)
+## By installing dependencies manually
 
 Update your packages :
 
@@ -57,16 +50,9 @@ Install all the dependencies :
 sudo apt install nodejs npm 
 ```
 
-Install Vue CLI globally :
-
-```
-npm install -g @vue/cli
-```
-
 Versions :
 * Nodejs v12.22.5
 * Npm 7.5.2
-* Vue CLI 5.0.4
 
 ## Structure
 

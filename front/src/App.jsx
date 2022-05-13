@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import styles from './App.module.css';
 
 function App() {
@@ -7,7 +6,7 @@ function App() {
       <header class={styles.header}>
         <img src={logo} class={styles.logo} alt="logo" />
         <p>
-          Hello world!
+          Hello World!
         </p>
       </header>
     </div>

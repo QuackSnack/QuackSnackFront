@@ -28,13 +28,13 @@ function fd-back() {
 
 function fd-pass() {
     printf  "${CYAN}configuring database${NC}\n"
-    sudo sed -i 's/peer/trust/g' /etc/postgresql/13/main/pg_hba.conf
-    sudo sed -i 's/md5/trust/g' /etc/postgresql/13/main/pg_hba.conf
+    sudo sed -i 's/peer/trust/g' /etc/postgresql/*/main/pg_hba.conf
+    sudo sed -i 's/md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
     sudo service postgresql restart
     psql -U postgres -d template1 -c "ALTER USER postgres PASSWORD '$DATABASE_PASSWORD';" 
     sudo printf "$DATABASE_HOST:$DATABASE_PORT:$DATABASE_NAME:$DATABASE_USER:$DATABASE_PASSWORD" > ~/.pgpass
     sudo chmod 0600 ~/.pgpass
-    sudo sed -i 's/trust/md5/g' /etc/postgresql/13/main/pg_hba.conf
+    sudo sed -i 's/trust/md5/g' /etc/postgresql/*/main/pg_hba.conf
     sudo service postgresql restart
 }
 
@@ -107,11 +107,11 @@ function fd-install() {
 }
 
 function fd-quick-install() {
-    printf  "${RED}making a quick install${NC}\n"
+    printf  "${CYAN}making a quick install${NC}\n"
     fd-install
     fd-libs
     fd-projects
     fd-pass
     fd-database "create"
-    printf  "${RED}run \"fd-front\" to start the frontend\nrun \"fd-back\" to start the backend${NC}\n"
+    printf  "${CYAN}run \"fd-front\" to start the frontend\nrun \"fd-back\" to start the backend${NC}\n"
 }

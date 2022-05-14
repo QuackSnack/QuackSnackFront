@@ -2,12 +2,14 @@
 
 This project contains the frontend of a web-application called **FoodDistribution** that propose the typical services of any food chain. This project and the web-application is made purely as an educationnal purpose.
 
-Click here to see the [backend](https://github.com/GregoryHue/FoodDistributionBack).
+Click here to see the [backend](https://gitlab.com/GregoryHue/FoodDistributionBack).
 
 
 # Setup
 
 This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/FoodDistributionFront`.
+
+***WARNING : It is highly recommended to set this up on an empty distribution as it may mess with your current packages, libraries and database system.***
 
 ## By using a shell
 
@@ -17,7 +19,7 @@ To facilitate the setup and project management, the same shell is proposed in bo
 cd
 mkdir dev
 cd dev
-git clone https://gitlab.com/GregoryHue/FoodDistributionBack.git
+git clone https://gitlab.com/GregoryHue/FoodDistributionFront.git
 cd FoodDistributionFront
 source fd-shell.sh; fd-quick-install
 ```

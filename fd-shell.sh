@@ -17,7 +17,7 @@ declare DATABASE_PASSWORD="fd_password"
 function fd-front() {
     cd
     cd dev/FoodDistributionFront/front
-    npm run serve
+    npm run dev
 }    
 
 function fd-back() {
@@ -84,7 +84,8 @@ function fd-projects() {
     mkdir -p $HOME/dev
     cd $HOME/dev
     git clone https://gitlab.com/GregoryHue/FoodDistributionBack.git
-    cd FoodDistributionFront/back && python3 manage.py makemigrations && python3 manage.py migrate
+    cd FoodDistributionBack/back
+    python3 manage.py makemigrations && python3 manage.py migrate
     git clone https://gitlab.com/GregoryHue/FoodDistributionFront.git
     cd FoodDistributionFront/front
     npm install
@@ -106,9 +107,11 @@ function fd-install() {
 }
 
 function fd-quick-install() {
+    printf  "${RED}making a quick install${NC}\n"
     fd-install
     fd-libs
     fd-projects
     fd-pass
     fd-database "create"
+    printf  "${RED}run \"fd-front\" to start the frontend\nrun \"fd-back\" to start the backend${NC}\n"
 }

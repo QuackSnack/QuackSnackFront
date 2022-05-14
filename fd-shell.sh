@@ -60,7 +60,7 @@ function fd-libs() {
     printf  "${CYAN}installing packages and libraries${NC}\n"
     sudo apt update -y
     sudo apt upgrade -y
-    sudo apt install -y python3 python3-pip postgresql postgresql-contrib libpq-dev nodejs npm
+    sudo apt install -y python3 python3-pip postgresql-13 postgresql-contrib-13 libpq-dev nodejs npm
     sudo service postgresql restart
     sudo python3 -m pip install psycopg2
     sudo python3 -m pip install django
@@ -113,5 +113,10 @@ function fd-quick-install() {
     fd-projects
     fd-pass
     fd-database "create"
+<<<<<<< HEAD
     printf  "${CYAN}run \"fd-front\" to start the frontend\nrun \"fd-back\" to start the backend${NC}\n"
 }
+=======
+    printf  "${RED}run \"fd-front\" to start the frontend\nrun \"fd-back\" to start the backend${NC}\n"
+}
+>>>>>>> cc5e304805256aa4adce61d63ca22f19d0b74da0

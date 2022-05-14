@@ -4,7 +4,6 @@ This project contains the frontend of a web-application called **FoodDistributio
 
 Click here to see the [backend](https://gitlab.com/GregoryHue/FoodDistributionBack).
 
-
 # Setup
 
 This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/FoodDistributionFront`.

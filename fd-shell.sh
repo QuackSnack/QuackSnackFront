@@ -60,7 +60,7 @@ function fd-libs() {
     printf  "${CYAN}installing packages and libraries${NC}\n"
     sudo apt update -y
     sudo apt upgrade -y
-    sudo apt install -y python3 python3-pip postgresql-13 postgresql-contrib-13 libpq-dev nodejs npm
+    sudo apt install -y python3 python3-pip postgresql postgresql-contrib libpq-dev nodejs npm
     sudo service postgresql restart
     sudo python3 -m pip install psycopg2
     sudo python3 -m pip install django

@@ -10,7 +10,7 @@ This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project
 
 ***WARNING : It is highly recommended to set this up on an empty distribution as it may mess with your current packages, libraries and database system.***
 
-## By using a shell
+## By using a shell 
 
 To facilitate the setup and project management, the same shell is proposed in both projects. Use this command to create a folder, pull the project inside of it, then make a quick install with the shell :
 

@@ -111,8 +111,8 @@ function fd-quick-install() {
     printf  "${CYAN}making a quick install${NC}\n"
     fd-install
     fd-libs
-    fd-projects
     fd-pass
+    fd-projects
     fd-database "create"
     printf  "${CYAN}run \"fd-front\" to start the frontend\nrun \"fd-back\" to start the backend${NC}\n"
 }

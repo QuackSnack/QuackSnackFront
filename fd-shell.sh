@@ -15,14 +15,12 @@ declare DATABASE_USER="fd_user"
 declare DATABASE_PASSWORD="fd_password"
     
 function fd-front() {
-    cd
-    cd dev/FoodDistributionFront/front
+    cd $HOME/dev/FoodDistributionFront/front
     npm run dev
 }    
 
 function fd-back() {
-    cd
-    cd dev/FoodDistributionBack/back
+    cd $HOME/dev/FoodDistributionBack/back
     python3 manage.py runserver
 }
 
@@ -61,12 +59,12 @@ function fd-libs() {
     sudo apt update -y
     sudo apt upgrade -y
     sudo apt install -y python3 python3-pip postgresql postgresql-contrib libpq-dev nodejs npm
-    sudo service postgresql restart
+    sudo service postgresql start
     sudo python3 -m pip install psycopg2
     sudo python3 -m pip install django
-    sudo npm update -g npm
     sudo npm install -g n
     sudo n stable
+    sudo npm update -g npm
 }
 
 function fd-remove() {
@@ -82,10 +80,13 @@ function fd-remove() {
 
 function fd-projects() {
     mkdir -p $HOME/dev
+
     cd $HOME/dev
     git clone https://gitlab.com/GregoryHue/FoodDistributionBack.git
     cd FoodDistributionBack/back
     python3 manage.py makemigrations && python3 manage.py migrate
+    
+    cd $HOME/dev
     git clone https://gitlab.com/GregoryHue/FoodDistributionFront.git
     cd FoodDistributionFront/front
     npm install

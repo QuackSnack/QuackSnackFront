@@ -1,12 +1,15 @@
-import styles from './App.module.css';
+import { lazy } from "solid-js";
+
+const Navigation = lazy(() => import("./components/Navigation"));
+const Page = lazy(() => import("./components/Page"));
 
 function App() {
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <p>
-          Hello World!
-        </p>
+    <div>
+      <header>
+        <h1>Pages</h1>
+        <Navigation/>
+        <Page/>
       </header>
     </div>
   );

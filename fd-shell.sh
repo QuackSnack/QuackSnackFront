@@ -113,7 +113,7 @@ function fd-projects() {
     python3 manage.py makemigrations && python3 manage.py migrate
     
     cd $HOME/dev
-    git clone https://git@gitlab.com:GregoryHue/FoodDistributionFront.git
+    git clone git@gitlab.com:GregoryHue/FoodDistributionFront.git
     cd FoodDistributionFront/front
     npm install
 }

@@ -15,11 +15,11 @@ This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project
 To facilitate the setup and project management, the same shell is proposed in both projects. Use this command to create a folder, pull the project inside of it, then make a quick install with the shell :
 
 ```bash
-cd
-mkdir dev
-cd dev
-git clone git@gitlab.com:GregoryHue/FoodDistributionFront.git &&
-FoodDistributionFront
+cd && \
+mkdir dev && \
+cd dev && \
+git clone git@gitlab.com:GregoryHue/FoodDistributionFront.git && \
+FoodDistributionFront && \
 source fd-shell.sh; fd-quick-install
 ```
 

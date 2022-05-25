@@ -89,7 +89,7 @@ function fd-libs() {
     sudo npm install -g n
     sudo n stable
     sudo n prune
-    npm install -g npm@latest
+    sudo npm install -g npm@latest
 }
 
 # Remove the fd shell

@@ -19,7 +19,7 @@ cd && \
 mkdir dev && \
 cd dev && \
 git clone git@gitlab.com:GregoryHue/FoodDistributionFront.git && \
-FoodDistributionFront && \
+cd FoodDistributionFront && \
 source fd-shell.sh; fd-quick-install
 ```
 

@@ -88,7 +88,8 @@ function fd-libs() {
     sudo python3 -m pip install django
     sudo npm install -g n
     sudo n stable
-    sudo npm update -g npm
+    sudo n prune
+    npm install -g npm@latest
 }
 
 # Remove the fd shell

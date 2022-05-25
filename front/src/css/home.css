@@ -4,3 +4,9 @@ div.frame {
     width: 50vw;
     margin: auto;
 }
+
+div.frame-no-border {
+    height: 50vh;
+    width: 25vw;
+    margin: auto;
+}

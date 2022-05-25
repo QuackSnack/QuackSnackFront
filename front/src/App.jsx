@@ -9,7 +9,6 @@ function App() {
       <header>
         <Navigation/>
         <Page/>
-        <Footer/>
       </header>
     </div>
   );

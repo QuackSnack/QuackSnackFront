@@ -1,0 +1,4 @@
+div.page {
+    background-color: antiquewhite;
+    height: calc(100vh - 75px);
+}

@@ -1,13 +1,13 @@
 import { lazy } from "solid-js";
 import { Routes, Route } from "solid-app-router"
 
-const Home = lazy(() => import("../views/Home"));
-const Login = lazy(() => import("../views/Login"));
-const Signup = lazy(() => import("../views/Signup"));
+const Home = lazy(() => import("../components/Home"));
+const Login = lazy(() => import("../components/Login"));
+const Signup = lazy(() => import("../components/Signup"));
 
 function Page() {
     return (
-        <div>
+        <div class="page">
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />

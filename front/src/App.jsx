@@ -5,11 +5,11 @@ const Page = lazy(() => import("./components/Page"));
 
 function App() {
   return (
-    <div>
+    <div class="app">
       <header>
-        <h1>Pages</h1>
         <Navigation/>
         <Page/>
+        <Footer/>
       </header>
     </div>
   );

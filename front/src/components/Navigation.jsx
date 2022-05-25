@@ -1,14 +1,18 @@
-import { lazy } from "solid-js";
 import { Link } from "solid-app-router"
+import { Navbar, Container, Nav } from "solid-bootstrap"
 
 function Navigation() {
     return (
         <div>
-            <nav>
-                <Link href="/login">Log in</Link>
-                <Link href="/signup">Sign up</Link>
-                <Link href="/home">Home</Link>
-            </nav>
+            <Navbar bg="dark" variant="dark" class="fd-navbar">
+                <Container>
+                    <Navbar.Brand href="/home">Food Distribution</Navbar.Brand>
+                    <Nav class="me-auto">
+                        <Nav.Link href="/login">Log in</Nav.Link>
+                        <Nav.Link href="/signup">Sign up</Nav.Link>
+                    </Nav>
+                </Container>
+            </Navbar>
         </div>
     );
 }

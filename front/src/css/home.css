@@ -1,0 +1,6 @@
+div.frame {
+    box-shadow: 0px 0px 2px 5px #212529;
+    height: 50vh;
+    width: 50vw;
+    margin: auto;
+}

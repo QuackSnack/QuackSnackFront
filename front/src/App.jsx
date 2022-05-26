@@ -1,14 +1,14 @@
 import { lazy } from "solid-js";
 
 const Navigation = lazy(() => import("./components/Navigation"));
-const Page = lazy(() => import("./components/Page"));
+const Router = lazy(() => import("./components/Router"));
 
 function App() {
   return (
     <div class="app">
       <header>
         <Navigation/>
-        <Page/>
+        <Router/>
       </header>
     </div>
   );

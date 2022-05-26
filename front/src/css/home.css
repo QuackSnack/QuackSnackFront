@@ -10,3 +10,8 @@ div.frame-no-border {
     width: 25vw;
     margin: auto;
 }
+
+div.page {
+    height: calc(100vh - 75px);
+    overflow-x: hidden;
+}

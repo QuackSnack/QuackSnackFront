@@ -12,10 +12,11 @@ function Login(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <h4>Log in</h4>
+          <h4>Login</h4>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+
         <Form autocomplete="off">
           <FloatingLabel controlId="floatingInput" label="Email address" class="mb-3">
             <Form.Control type="email" placeholder="name@example.com" />
@@ -24,9 +25,10 @@ function Login(props) {
             <Form.Control type="password" placeholder="Password" />
           </FloatingLabel>
         </Form>
+
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-secondary" type="submit">Submit</Button>
+        <Button variant="outline-secondary" type="submit">Sign in</Button>
       </Modal.Footer>
     </Modal>
   );

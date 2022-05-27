@@ -14,7 +14,7 @@ function Navigation() {
                 <Container>
                     <Navbar.Brand href="/home"><b>Food Distribution</b></Navbar.Brand>
                     <Nav class="me-auto">
-                        <Button class="nav-button" onClick={() => setLogin(true)}>Log in</Button>
+                        <Button class="nav-button" onClick={() => setLogin(true)}>Login</Button>
                         <Login show={login} setShow={setLogin}/>
                         
                         <Button class="nav-button" onClick={() => setSignup(true)}>Sign up</Button>

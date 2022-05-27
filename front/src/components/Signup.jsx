@@ -15,70 +15,76 @@ function Signup(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form autocomplete="off">
-          <Row class="mb-2">
-            <Form.Group as={Col} controlId="first_name">
+
+        <Form>
+          <Row class="g-2 mb-3">
+            <Col md>
               <FloatingLabel label="First name">
-                <Form.Control />
+                <Form.Control placeholder />
               </FloatingLabel>
-            </Form.Group>
+            </Col>
 
-            <Form.Group as={Col} controlId="last_name">
+            <Col md>
               <FloatingLabel label="Last name">
-                <Form.Control />
+                <Form.Control placeholder/>
               </FloatingLabel>
-            </Form.Group>
+            </Col>
           </Row>
 
-          <Row class="mb-2">
-            <Form.Group as={Col} md="4" controlId="country">
-              <FloatingLabel label="Country" class="mb-3">
-                <Form.Control />
+          <Row class="g-2 mb-3">
+            <Col md>
+              <FloatingLabel label="Country">
+                <Form.Control placeholder />
               </FloatingLabel>
-            </Form.Group>
+            </Col>
 
-            <Form.Group as={Col} md="8" controlId="town">
-              <FloatingLabel label="Town" class="mb-3">
-                <Form.Control />
+            <Col md>
+              <FloatingLabel label="Town">
+                <Form.Control placeholder/>
               </FloatingLabel>
-            </Form.Group>
+            </Col>
           </Row>
 
-          <Form.Group as={Col} controlId="street">
-            <FloatingLabel label="Street" class="mb-3">
-              <Form.Control />
-            </FloatingLabel>
-          </Form.Group>
+          <FloatingLabel label="Street" class="mb-3">
+            <Form.Control placeholder/>
+          </FloatingLabel>
 
-          <Row class="mb-2">
-            <Form.Group as={Col} controlId="username">
-              <FloatingLabel label="Username" class="mb-3">
-                <Form.Control />
+          <Row class="g-2 mb-3">
+            <Col md>
+              <FloatingLabel label="Username">
+                <Form.Control placeholder />
               </FloatingLabel>
-            </Form.Group>
+            </Col>
 
-            <Form.Group as={Col} controlId="email">
-              <FloatingLabel label="Email address" class="mb-3">
-                <Form.Control />
+            <Col md>
+              <FloatingLabel label="Email address">
+                <Form.Control placeholder/>
               </FloatingLabel>
-            </Form.Group>
+            </Col>
           </Row>
 
-          <Form.Group as={Col} controlId="password">
-            <FloatingLabel label="Password" class="mb-3">
-              <Form.Control type="password" />
-            </FloatingLabel>
-          </Form.Group>
+          <Form.Select aria-label="Default select example" class="mb-3">
+            <option value="1">Client</option>
+            <option value="2">Restaurant</option>
+          </Form.Select>
 
-          <Form.Group as={Col} controlId="r_password">
-            <FloatingLabel label="Repeat password" class="mb-3">
-              <Form.Control type="password" />
-            </FloatingLabel>
-          </Form.Group>
+          <Row class="g-2 mb-3">
+            <Col md>
+              <FloatingLabel label="Password">
+                <Form.Control placeholder type="password"/>
+              </FloatingLabel>
+            </Col>
+
+            <Col md>
+              <FloatingLabel label="Repeat password">
+                <Form.Control placeholder type="password"/>
+              </FloatingLabel>
+            </Col>
+          </Row>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-secondary" type="submit">Submit</Button>
+        <Button variant="outline-secondary" type="submit">Register</Button>
       </Modal.Footer>
     </Modal>
   );

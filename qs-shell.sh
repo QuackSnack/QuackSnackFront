@@ -86,6 +86,7 @@ function qs-libs() {
     sudo service postgresql start
     sudo python3 -m pip install psycopg2
     sudo python3 -m pip install django
+    sudo python3 -m pip install djangorestframework
     sudo npm install -g n
     sudo n stable
     sudo n prune

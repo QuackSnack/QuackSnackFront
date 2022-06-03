@@ -112,7 +112,7 @@ function qs-projects() {
     cd $HOME/dev
     git clone git@gitlab.com:GregoryHue/QuackSnackBack.git
     cd QuackSnackBack/back
-    python3 manage.py makemigrations && python3 manage.py migrate
+    python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py data.json
     
     cd $HOME/dev
     git clone git@gitlab.com:GregoryHue/QuackSnackFront.git

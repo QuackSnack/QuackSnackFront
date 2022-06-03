@@ -1,10 +1,14 @@
 /* color palette from <https://github.com/vuejs/theme> */
-:root {
-
-    --first-color:#3D5A80;
-    --second-color:#98C1D9;
-    --third-color: #293241;
-    --highlight-color:#EE6C4D;
-    --background-color:#E0FBFC;
-  
+:root.light-theme {
+    --background-color-primary: #ebebeb;
+    --background-color-secondary: #fafafa;
+    --accent-color: #cacaca;
+    --text-primary-color: #222;
 }
+
+:root.dark-theme {
+    --background-color-primary: #1e1e1e;
+    --background-color-secondary: #2d2d30;
+    --accent-color: #3f3f3f;
+    --text-primary-color: #ddd;
+  }

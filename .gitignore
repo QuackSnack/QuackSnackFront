@@ -1,0 +1,6 @@
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/
+
+# dotenv environment variable files
+node_modules
+dist

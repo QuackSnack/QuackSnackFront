@@ -1,0 +1,17 @@
+image: node:16.15.0
+
+stages:
+  - deploy
+
+cache:
+  paths:
+    - front/node_modules/
+
+deploy:
+  stage: deploy
+  script:
+    - cd front/
+    - npm install
+    - npm run build
+  only:
+    - main

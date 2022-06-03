@@ -1,4 +1,4 @@
-# fd-shell begin
+# qs-shell begin
 
 RED='\033[0;31m'
 CYAN='\033[0;36m'
@@ -8,46 +8,46 @@ declare DATABASE_HOST="localhost"
 
 declare DATABASE_PORT="5432"
 
-declare DATABASE_NAME="fd_database"
+declare DATABASE_NAME="qs_database"
 
-declare DATABASE_USER="fd_user"
+declare DATABASE_USER="qs_user"
     
-declare DATABASE_PASSWORD="fd_password"
+declare DATABASE_PASSWORD="qs_password"
 
 # Runs the frontend
-function fd-front() {
-    cd $HOME/dev/FoodDistributionFront/front
+function qs-front() {
+    cd $HOME/dev/QuackSnackFront/front
     npm run dev
 }
 
 # Runs the backend
-function fd-back() {
-    cd $HOME/dev/FoodDistributionBack/back
+function qs-back() {
+    cd $HOME/dev/QuackSnackBack/back
     python3 manage.py runserver
 }
 
 # Pulls the changes on every project
-function fd-pull() {
-    printf  "${CYAN}pulling FoodDistributionBack${NC}\n"
-    cd $HOME/dev/FoodDistributionBack && git status
+function qs-pull() {
+    printf  "${CYAN}pulling QuackSnackBack${NC}\n"
+    cd $HOME/dev/QuackSnackBack && git status
     git fetch
     git pull
-    printf  "${CYAN}pulling FoodDistributionFront${NC}\n"
-    cd $HOME/dev/FoodDistributionFront && git status
+    printf  "${CYAN}pulling QuackSnackFront${NC}\n"
+    cd $HOME/dev/QuackSnackFront && git status
     git fetch
     git pull
 }
 
 # Push the changes on every projects
-function fd-push() {
-    printf  "${CYAN}pushing to FoodDistributionBack${NC}\n"
-    cd $HOME/dev/FoodDistributionBack && git status && git add . && git commit -m "Updated: `date +'%d-%m-%Y %H:%M:%S'`" && git push
-    printf  "${CYAN}puhsing to FoodDistributionFront${NC}\n"
-    cd $HOME/dev/FoodDistributionFront && git status && git add . && git commit -m "Updated: `date +'%d-%m-%Y %H:%M:%S'`" && git push
+function qs-push() {
+    printf  "${CYAN}pushing to QuackSnackBack${NC}\n"
+    cd $HOME/dev/QuackSnackBack && git status && git add . && git commit -m "Updated: `date +'%d-%m-%Y %H:%M:%S'`" && git push
+    printf  "${CYAN}puhsing to QuackSnackFront${NC}\n"
+    cd $HOME/dev/QuackSnackFront && git status && git add . && git commit -m "Updated: `date +'%d-%m-%Y %H:%M:%S'`" && git push
 }
 
 # Change the password of the database superuser 
-function fd-pass() {
+function qs-pass() {
     printf  "${CYAN}configuring database${NC}\n"
     sudo sed -i 's/peer/trust/g' /etc/postgresql/*/main/pg_hba.conf
     sudo sed -i 's/md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
@@ -59,8 +59,8 @@ function fd-pass() {
     sudo service postgresql restart
 }
 
-# Create or drop the fd dabatase
-function fd-database() {
+# Create or drop the qs dabatase
+function qs-database() {
     if [ -n "$1" ] && [ "$1" == "create" ]; then
         printf  "${CYAN}creating database${NC}\n"
         sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD createdb $DATABASE_NAME
@@ -71,14 +71,14 @@ function fd-database() {
         printf  "${CYAN}dropping database & user${NC}\n"
         sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DATABASE_NAME';"
         sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD dropdb $DATABASE_NAME -e
-        sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD dropuser fd_user -e
+        sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD dropuser qs_user -e
     else
         printf  "${CYAN}create / drop${NC}\n"
     fi
 }
 
 # Installs all required libraries
-function fd-libs() {
+function qs-libs() {
     printf  "${CYAN}installing packages and libraries${NC}\n"
     sudo apt update -y
     sudo apt upgrade -y
@@ -92,56 +92,56 @@ function fd-libs() {
     sudo npm install -g npm@latest
 }
 
-# Remove the fd shell
-function fd-remove() {
-    if grep -Fxq "source ~/.fd-bashrc" ~/.bashrc
+# Remove the qs shell
+function qs-remove() {
+    if grep -Fxq "source ~/.qs-bashrc" ~/.bashrc
     then
-        printf  "${CYAN}removing fd-shell${NC}\n"
-        rm ~/.fd-bashrc
-        sed -i '/^source ~\/\.fd-bashrc/d'  ~/.bashrc
+        printf  "${CYAN}removing qs-shell${NC}\n"
+        rm ~/.qs-bashrc
+        sed -i '/^source ~\/\.qs-bashrc/d'  ~/.bashrc
     else
-        printf  "${RED}fd-shell is not installed${NC}\n"
+        printf  "${RED}qs-shell is not installed${NC}\n"
     fi 
 }
 
 # Pulls the projects
-function fd-projects() {
+function qs-projects() {
     mkdir -p $HOME/dev
 
     cd $HOME/dev
-    git clone git@gitlab.com:GregoryHue/FoodDistributionBack.git
-    cd FoodDistributionBack/back
+    git clone git@gitlab.com:GregoryHue/QuackSnackBack.git
+    cd QuackSnackBack/back
     python3 manage.py makemigrations && python3 manage.py migrate
     
     cd $HOME/dev
-    git clone git@gitlab.com:GregoryHue/FoodDistributionFront.git
-    cd FoodDistributionFront/front
+    git clone git@gitlab.com:GregoryHue/QuackSnackFront.git
+    cd QuackSnackFront/front
     npm install
 }
 
-# Installs the fd shell
-function fd-install() {
-    if grep -Fxq "source ~/.fd-bashrc" ~/.bashrc
+# Installs the qs shell
+function qs-install() {
+    if grep -Fxq "source ~/.qs-bashrc" ~/.bashrc
     then
-        printf  "${RED}fd-shell is already installed${NC}\n"
-        fd-remove
-        printf  "${CYAN}re-installing fd-shell${NC}\n"
-        cat ./fd-shell.sh > ~/.fd-bashrc
-        printf  "\nsource ~/.fd-bashrc" >> ~/.bashrc
+        printf  "${RED}qs-shell is already installed${NC}\n"
+        qs-remove
+        printf  "${CYAN}re-installing qs-shell${NC}\n"
+        cat ./qs-shell.sh > ~/.qs-bashrc
+        printf  "\nsource ~/.qs-bashrc" >> ~/.bashrc
     else
-        printf  "${CYAN}installing fd-shell${NC}\n"
-        cat ./fd-shell.sh > ~/.fd-bashrc
-        printf  "\nsource ~/.fd-bashrc" >> ~/.bashrc
+        printf  "${CYAN}installing qs-shell${NC}\n"
+        cat ./qs-shell.sh > ~/.qs-bashrc
+        printf  "\nsource ~/.qs-bashrc" >> ~/.bashrc
     fi 
 }
 
 # Installs all the requirements
-function fd-quick-install() {
+function qs-quick-install() {
     printf  "${CYAN}making a quick install${NC}\n"
-    fd-install
-    fd-libs
-    fd-pass
-    fd-database "create"
-    fd-projects
-    printf  "${CYAN}run \"fd-front\" to start the frontend\nrun \"fd-back\" to start the backend${NC}\n"
+    qs-install
+    qs-libs
+    qs-pass
+    qs-database "create"
+    qs-projects
+    printf  "${CYAN}run \"qs-front\" to start the frontend\nrun \"qs-back\" to start the backend${NC}\n"
 }

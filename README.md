@@ -23,13 +23,7 @@ cd QuickSnackFront && \
 source qs-shell.sh; qs-quick-install
 ```
 
-This will install the shell in your `~/.bashrc` file. The shell includes the following commands :
-
-* `qs-install` : install the shell in `~/.bashrc`.
-* `qs-remove` : remove the shell in `~/.bashrc`.
-* `qs-projects` : pull every projects.
-
-If you wish to remove the shell, use this command from any folder :
+This will install the shell in your `~/.bashrc` file. If you wish to remove the shell, use this command from any folder :
 
 ```
 qs-remove

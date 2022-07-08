@@ -1,3 +1,5 @@
+# Deprecated as we now use GitHub instead of GitLab for better visibility
+
 image: node:16.15.0
 
 stages:

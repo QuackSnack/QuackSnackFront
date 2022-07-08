@@ -2,7 +2,7 @@
 
 This project contains the frontend of a web-application called **QuickSnack** *(for a quick snack)* that propose the typical services of any food chain. This project and the web-application is made purely as an educationnal purpose.
 
-Click here to see the [backend](https://gitlab.com/GregoryHue/QuickSnackBack).
+Click here to see the [backend](https://github.com/GregoryHue/QuackSnackBack).
 
 # Setup
 
@@ -18,7 +18,7 @@ To facilitate the setup and project management, the same shell is proposed in bo
 cd && \
 mkdir dev && \
 cd dev && \
-git clone https://gitlab.com/GregoryHue/QuickSnackFront.git && \
+git clone git@github.com:GregoryHue/QuackSnackFront.git && \
 cd QuickSnackFront && \
 source qs-shell.sh; qs-quick-install
 ```
@@ -46,8 +46,11 @@ sudo apt install nodejs npm
 ```
 
 Versions :
-* Nodejs v12.22.5
-* Npm 7.5.2
+* Nodejs v16.16.0
+* Npm 8.11.0
+* Python 3.8.10
+* PostgreSQL 12.11
+* Vue 3
 
 ## Structure
 
@@ -59,6 +62,7 @@ main/
     subfiles.ext
 .gitignore
 LICENSE
-LICENSE.md
+README.md
 qs-shell.sh
 ```
+

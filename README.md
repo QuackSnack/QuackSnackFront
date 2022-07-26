@@ -19,7 +19,7 @@ cd && \
 mkdir dev && \
 cd dev && \
 git clone git@github.com:GregoryHue/QuackSnackFront.git && \
-cd QuickSnackFront && \
+cd QuackSnackFront && \
 source qs-shell.sh; qs-quick-install
 ```
 

@@ -50,7 +50,7 @@ Versions :
 * Npm 8.11.0
 * Python 3.8.10
 * PostgreSQL 12.11
-* Vue 3
+* React 18.2.0
 
 ## Structure
 

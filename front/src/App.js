@@ -1,5 +1,8 @@
 import logo from './QL_Icon.svg';
 import './css/App.css';
+import { version } from 'react';
+
+console.log(version);
 
 function App() {
   return (

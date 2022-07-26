@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+  background-color: #3D5A80;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  animation: App-logo-spin infinite 20s linear;
+}

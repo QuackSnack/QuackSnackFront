@@ -1,5 +1,3 @@
-### UNUSED AS WE SWITCH FROM GITLAB TO GITHUB
-
 # qs-shell begin
 
 RED='\033[0;31m'

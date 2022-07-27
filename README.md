@@ -46,7 +46,7 @@ sudo apt install nodejs npm
 ```
 
 Versions :
-* Nodejs v16.16.0
+* Node 16.16.0
 * Npm 8.11.0
 * Python 3.8.10
 * PostgreSQL 12.11

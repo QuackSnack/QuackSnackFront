@@ -1,4 +1,4 @@
-import logo from './QL_Icon.svg';
+import logo from './logo/QL_Icon.svg';
 import './css/App.css';
 import { version } from 'react';
 

@@ -1,0 +1,55 @@
+body {
+  background-color: rgb(53, 50, 63);
+  color: white;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #3d5a80;
+  height: 70px;
+}
+
+.navbar-title {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  float: left;
+  font-size: 32px;
+  margin: 15px 0 15px 20px;
+
+  &:hover {
+    border-bottom: 1px solid orange;
+    margin-bottom: -1px;
+    color: orange;
+  }
+
+  &:active {
+    border-bottom: 1px solid black;
+    margin-bottom: -1px;
+    color: black;
+  }
+}
+
+.active-title {
+  border-bottom: 1px solid darkorange;
+  margin-bottom: -1px;
+  color: darkorange;
+}
+
+.navbar-logo {
+  height: 60px;
+  margin: 5px auto 5px 25px;
+  float: left;
+
+  &:hover {
+    filter: drop-shadow(0 0 5px orange);
+  }
+
+  &:active {
+    filter: drop-shadow(0 0 5px black);
+  }
+}
+
+.active-logo {
+  filter: drop-shadow(0 0 5px darkorange);
+}

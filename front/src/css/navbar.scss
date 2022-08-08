@@ -1,0 +1,76 @@
+body {
+  background-color: rgb(53, 50, 63);
+  color: white;
+  margin: 0;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #3d5a80;
+  height: 70px;
+  box-shadow: 0px -2px 5px 1px black;
+}
+
+.navbar-title {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  float: left;
+  font-size: 32px;
+  margin: 15px 0 15px 20px;
+
+  &:hover {
+    border-bottom: 1px solid orange;
+    margin-bottom: -1px;
+    color: orange;
+  }
+
+  &:active {
+    border-bottom: 1px solid black;
+    margin-bottom: -1px;
+    color: black;
+  }
+
+  &.active-title {
+    border-bottom: 1px solid darkorange;
+    margin-bottom: -1px;
+    color: darkorange;
+  }
+}
+
+.qs-logo {
+  height: 60px;
+  margin: 5px auto 5px 25px;
+  float: left;
+
+  &:hover {
+    filter: drop-shadow(0 0 1px orange);
+  }
+
+  &:active {
+    filter: drop-shadow(0 0 1px black);
+  }
+
+  &.active-qs {
+    filter: drop-shadow(0 0 1px darkorange);
+  }
+}
+
+.navbar-right {
+  float: right;
+  .navbar-logo {
+    height: 60px;
+    width: 60px;
+    margin: 5px 25px 5px auto;
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: orange;
+    }
+
+    &.active-logo {
+      color: orange;
+    }
+  }
+}

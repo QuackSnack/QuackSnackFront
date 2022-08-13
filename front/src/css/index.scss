@@ -1,2 +1,11 @@
-@import "navbar.scss";
-@import "rightpanel.scss";
+@import 'navbar.scss';
+@import 'rightpanel.scss';
+@import 'home.scss';
+
+:root {
+  --first-color: #3d5a80;
+  --secondary-color: #98c1d9;
+  --third-color: #e0fbfc;
+  --accent-color: #ee6c4d;
+  --fourth-color: #293241;
+}

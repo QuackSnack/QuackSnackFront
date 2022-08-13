@@ -4,10 +4,12 @@ import { Drawer, Switch, Typography, Stack, Divider, ToggleButtonGroup, ToggleBu
 function SettingsRightPanel(props: { open: boolean; setOpen: Function }) {
   const { open } = props
   const { setOpen } = props
-  const [view, setView] = React.useState('list')
+  const [view, setView] = React.useState('fr')
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
-    setView(nextView)
+    if (nextView !== null) {
+      setView(nextView)
+    }
   }
 
   return (
@@ -22,11 +24,14 @@ function SettingsRightPanel(props: { open: boolean; setOpen: Function }) {
         </Stack>
         <Stack>
           <ToggleButtonGroup orientation='vertical' value={view} exclusive onChange={handleChange}>
-            <ToggleButton value='module' aria-label='module'>
-              French
+            <ToggleButton color='primary' value='fr'>
+              Français
             </ToggleButton>
-            <ToggleButton value='quilt' aria-label='quilt'>
+            <ToggleButton color='primary' value='en'>
               English
+            </ToggleButton>
+            <ToggleButton color='primary' value='ot'>
+              Some other language
             </ToggleButton>
           </ToggleButtonGroup>
         </Stack>

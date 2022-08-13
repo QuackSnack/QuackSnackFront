@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Typography } from '@mui/material'
 import { AccountBox, SettingsApplications } from '@mui/icons-material'
 import SettingsRightPanel from './SettingsRightPanel'
-import { ReactComponent as QuackSnack } from '../logo/icon.svg'
+import { ReactComponent as QuackSnack } from '../logo/QS_Icon_Dark.svg'
 
 function NavBar() {
   const [open, setOpen] = useState(false)

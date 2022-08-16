@@ -127,11 +127,11 @@ function qs-install() {
         printf  "${RED}qs-shell is already installed${NC}\n"
         qs-remove
         printf  "${CYAN}re-installing qs-shell${NC}\n"
-        cat ./qs-shell.sh > ~/.qs-bashrc
+        cat ~/dev/QuackSnackBack/qs-shell.sh > ~/.qs-bashrc
         printf  "\nsource ~/.qs-bashrc" >> ~/.bashrc
     else
         printf  "${CYAN}installing qs-shell${NC}\n"
-        cat ./qs-shell.sh > ~/.qs-bashrc
+        cat ~/dev/QuackSnackBack/qs-shell.sh > ~/.qs-bashrc
         printf  "\nsource ~/.qs-bashrc" >> ~/.bashrc
     fi 
 }

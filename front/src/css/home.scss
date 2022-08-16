@@ -1,0 +1,19 @@
+.main-frame {
+    margin: 2%;
+}
+
+.qs-logo-title {
+    display: block;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-field {
+    margin:32px auto;
+    width: 50%;
+    
+    & div {
+        width: 100%;
+    }
+}

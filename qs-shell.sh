@@ -98,7 +98,7 @@ function qs-remove() {
     if grep -Fxq "source ~/.qs-bashrc" ~/.bashrc
     then
         printf  "${CYAN}removing qs-shell${NC}\n"
-        rm ~/.qs-bashrc
+        rm $HOME/.qs-bashrc
         sed -i '/^source ~\/\.qs-bashrc/d'  ~/.bashrc
     else
         printf  "${RED}qs-shell is not installed${NC}\n"
@@ -127,11 +127,11 @@ function qs-install() {
         printf  "${RED}qs-shell is already installed${NC}\n"
         qs-remove
         printf  "${CYAN}re-installing qs-shell${NC}\n"
-        cat ~/dev/QuackSnackBack/qs-shell.sh > ~/.qs-bashrc
+        cat $HOME/dev/QuackSnackBack/qs-shell.sh > ~/.qs-bashrc
         printf  "\nsource ~/.qs-bashrc" >> ~/.bashrc
     else
         printf  "${CYAN}installing qs-shell${NC}\n"
-        cat ~/dev/QuackSnackBack/qs-shell.sh > ~/.qs-bashrc
+        cat $HOME/dev/QuackSnackBack/qs-shell.sh > ~/.qs-bashrc
         printf  "\nsource ~/.qs-bashrc" >> ~/.bashrc
     fi 
 }

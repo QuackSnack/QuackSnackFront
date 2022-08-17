@@ -16,8 +16,7 @@ declare DATABASE_PASSWORD="qs_password"
 
 # Runs the frontend
 function qs-front() {
-    cd $HOME/dev/QuackSnackFront/front
-    npm start
+    (cd $HOME/dev/QuackSnackFront/front && npm start)
 }
 
 # Runs the backend
@@ -25,28 +24,23 @@ function qs-back() {
     if service postgresql status | grep -Fq 'down'; then    
         sudo service postgresql start    
     fi
-    cd $HOME/dev/QuackSnackBack/back
-    python3 manage.py runserver
+    (cd $HOME/dev/QuackSnackBack/back && python3 manage.py runserver)
 }
 
 # Pulls the changes on every project
 function qs-pull() {
     printf  "${CYAN}pulling QuackSnackBack${NC}\n"
-    cd $HOME/dev/QuackSnackBack && git status
-    git fetch
-    git pull
+    (cd $HOME/dev/QuackSnackBack && git status && git fetch git pull)
     printf  "${CYAN}pulling QuackSnackFront${NC}\n"
-    cd $HOME/dev/QuackSnackFront && git status
-    git fetch
-    git pull
+    (cd $HOME/dev/QuackSnackFront && git status git fetch git pull)
 }
 
 # Push the changes on every projects
 function qs-push() {
     printf  "${CYAN}pushing to QuackSnackBack${NC}\n"
-    cd $HOME/dev/QuackSnackBack && git status && git add . && git commit -m "Updated: `date +'%d-%m-%Y %H:%M:%S'`" && git push
+    (cd $HOME/dev/QuackSnackBack && git status && git add . && git commit -m "Updated: `date +'%d-%m-%Y %H:%M:%S'`" && git push)
     printf  "${CYAN}puhsing to QuackSnackFront${NC}\n"
-    cd $HOME/dev/QuackSnackFront && git status && git add . && git commit -m "Updated: `date +'%d-%m-%Y %H:%M:%S'`" && git push
+    (cd $HOME/dev/QuackSnackFront && git status && git add . && git commit -m "Updated: `date +'%d-%m-%Y %H:%M:%S'`" && git push)
 }
 
 # Change the password of the database superuser 
@@ -112,15 +106,11 @@ function qs-remove() {
 function qs-projects() {
     mkdir -p $HOME/dev
 
-    cd $HOME/dev
-    git clone git@github.com:QuackSnack/QuackSnackBack.git
-    cd QuackSnackBack/back
-    python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json
+    (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackBack.git)
+    (cd QuackSnackBack/back && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json)
     
-    cd $HOME/dev
-    git clone git@github.com:QuackSnack/QuackSnackFront.git
-    cd QuackSnackFront/front
-    npm install
+    (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackFront.git)
+    (cd QuackSnackFront/front && npm install)
 }
 
 # Installs the qs shell

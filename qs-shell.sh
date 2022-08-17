@@ -104,7 +104,7 @@ function qs-projects() {
     mkdir -p $HOME/dev
 
     (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackBack.git)
-    (cd && cd $HOME/dev/QuackSnackBack/back && python3 -m venv env  && pip install -r requirements.txt && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json)
+    (cd && cd $HOME/dev/QuackSnackBack/back && python3 -m venv env  && source env/bin/activate && pip install -r requirements.txt && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json && deactivate)
     
     (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackFront.git)
     (cd && cd $HOME/dev/QuackSnackFront/front && npm install)

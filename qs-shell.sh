@@ -22,6 +22,9 @@ function qs-front() {
 
 # Runs the backend
 function qs-back() {
+    if service postgresql status | grep -Fq 'down'; then    
+        sudo service postgresql start    
+    fi
     cd $HOME/dev/QuackSnackBack/back
     python3 manage.py runserver
 }

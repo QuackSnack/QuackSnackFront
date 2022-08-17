@@ -24,7 +24,7 @@ function qs-back() {
     if service postgresql status | grep -Fq 'down'; then    
         sudo service postgresql start    
     fi
-    (cd $HOME/dev/QuackSnackBack/back && python3 manage.py runserver)
+    (cd $HOME/dev/QuackSnackBack/back && source env/bin/activate && python3 manage.py runserver)
 }
 
 # Pulls the changes on every project
@@ -81,9 +81,6 @@ function qs-libs() {
     sudo apt upgrade -y
     sudo apt install -y python3 python3-pip postgresql postgresql-contrib libpq-dev nodejs npm
     sudo service postgresql start
-    sudo python3 -m pip install psycopg2
-    sudo python3 -m pip install django
-    sudo python3 -m pip install djangorestframework
     sudo npm install -g n
     sudo n stable
     sudo n prune
@@ -107,7 +104,7 @@ function qs-projects() {
     mkdir -p $HOME/dev
 
     (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackBack.git)
-    (cd QuackSnackBack/back && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json)
+    (cd QuackSnackBack/back && python3 -m venv env  && pip install -r requirements.txt && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json)
     
     (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackFront.git)
     (cd QuackSnackFront/front && npm install)

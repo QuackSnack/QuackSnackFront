@@ -102,7 +102,7 @@ function qs-remove() {
     then
         printf  "${CYAN}removing qs-shell${NC}\n"
         rm $HOME/.qs-bashrc
-        sed -i '/^source ~\/\.qs-bashrc/d'  ~/.bashrc
+        sed -i '/^source ~\/\.qs-bashrc/d' ~/.bashrc
     else
         printf  "${RED}qs-shell is not installed${NC}\n"
     fi 
@@ -131,11 +131,11 @@ function qs-install() {
         qs-remove
         printf  "${CYAN}re-installing qs-shell${NC}\n"
         cat $HOME/dev/QuackSnackBack/qs-shell.sh > ~/.qs-bashrc
-        printf  "\nsource ~/.qs-bashrc" >> ~/.bashrc
+        printf  "source ~/.qs-bashrc" >> ~/.bashrc
     else
         printf  "${CYAN}installing qs-shell${NC}\n"
         cat $HOME/dev/QuackSnackBack/qs-shell.sh > ~/.qs-bashrc
-        printf  "\nsource ~/.qs-bashrc" >> ~/.bashrc
+        printf  "source ~/.qs-bashrc" >> ~/.bashrc
     fi 
 }
 

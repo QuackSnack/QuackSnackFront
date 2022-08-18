@@ -4,6 +4,7 @@ import './css/index.scss'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import App from './App'
 
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -13,6 +14,10 @@ const theme = createTheme({
     secondary: {
       main: '#293241',
       contrastText: '#e0fbfc',
+    },
+    success: {
+      main: '#98c1d9',
+      contrastText: '#293241',
     },
   },
 })

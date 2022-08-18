@@ -65,6 +65,9 @@ body {
 }
 
 .sign-button-group {
-  margin: 18px 25px auto auto;
+  margin-top: 18px;
   float: left;
+  & button {
+    margin-right: 15px;
+  }
 }

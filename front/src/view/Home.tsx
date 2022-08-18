@@ -1,13 +1,34 @@
 import React from 'react'
 import { TextField } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import QSLogoTitle from '../logo/QuackLogo_Dark.png'
 
 function Home() {
+  const LocationTextField = styled(TextField)({
+    '& label': {
+      color: 'var(--third-color)',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'var(--third-color)',
+      },
+      '&:hover fieldset': {
+        borderColor: 'var(--third-color)',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'var(--third-color)',
+      },
+      '& input': {
+        color: 'var(--third-color)',
+      },
+    },
+  })
+
   return (
     <div className='main-frame'>
-      <img src={QSLogoTitle} alt='QS logo' className='qs-logo-title'/>
+      <img src={QSLogoTitle} alt='QS logo' className='qs-logo-title' />
       <div className='search-field'>
-      <TextField color='primary' label="Search around you ..." variant="outlined" />
+        <LocationTextField label='Search around you ...' variant='outlined' />
       </div>
     </div>
   )

@@ -46,6 +46,7 @@ body {
 
 .navbar-right {
   float: right;
+  height: 100%;
   .navbar-logo {
     height: 60px;
     width: 60px;
@@ -61,4 +62,9 @@ body {
       color: var(--accent-color);
     }
   }
+}
+
+.sign-button-group {
+  margin: 18px 25px auto auto;
+  float: left;
 }

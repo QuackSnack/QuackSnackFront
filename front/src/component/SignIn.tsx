@@ -30,7 +30,7 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
         </DialogContent>
         <Divider />
         <DialogActions>
-          <Button variant='outlined' color='secondary'>
+          <Button variant='outlined' color='secondary' onClick={() => setOpen('')}>
             Cancel
           </Button>
           <Button variant='contained' color='secondary'>

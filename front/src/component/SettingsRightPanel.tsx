@@ -1,9 +1,9 @@
 import React from 'react'
 import { Drawer, Switch, Typography, Stack, Divider, ToggleButtonGroup, ToggleButton } from '@mui/material'
 
-function SettingsRightPanel(props: { open: boolean; setOpen: Function }) {
-  const { open } = props
-  const { setOpen } = props
+function SettingsRightPanel(props: { openPanel: boolean; setOpenPanel: Function }) {
+  const { openPanel } = props
+  const { setOpenPanel } = props
   const [view, setView] = React.useState('fr')
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
@@ -13,7 +13,7 @@ function SettingsRightPanel(props: { open: boolean; setOpen: Function }) {
   }
 
   return (
-    <Drawer anchor='right' open={open} onClose={() => setOpen(!open)}>
+    <Drawer anchor='right' open={openPanel} onClose={() => setOpenPanel(!openPanel)}>
       <div className='drawer-panel'>
         <Typography variant='h3'>Settings</Typography>
         <Divider />

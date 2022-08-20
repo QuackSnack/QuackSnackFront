@@ -79,7 +79,7 @@ function qs-libs() {
     printf  "${CYAN}installing packages and libraries${NC}\n"
     sudo apt update -y
     sudo apt upgrade -y
-    sudo apt install -y python3 python3-pip postgresql postgresql-contrib libpq-dev nodejs npm
+    sudo apt install -y python3 python3-pip python3-venv postgresql postgresql-contrib libpq-dev nodejs npm
     sudo service postgresql start
     sudo npm install -g n
     sudo n stable

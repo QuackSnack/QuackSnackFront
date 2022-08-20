@@ -27,14 +27,6 @@ function qs-back() {
     (cd $HOME/dev/QuackSnackBack/back && source env/bin/activate && python3 manage.py runserver)
 }
 
-# Pulls the changes on every project
-function qs-pull() {
-    printf  "${CYAN}pulling QuackSnackBack${NC}\n"
-    (cd $HOME/dev/QuackSnackBack && git status && git fetch git pull)
-    printf  "${CYAN}pulling QuackSnackFront${NC}\n"
-    (cd $HOME/dev/QuackSnackFront && git status git fetch git pull)
-}
-
 # Push the changes on every projects
 function qs-push() {
     printf  "${CYAN}pushing to QuackSnackBack${NC}\n"
@@ -134,5 +126,5 @@ function qs-quick-install() {
     qs-pass
     qs-database "create"
     qs-projects
-    printf  "${CYAN}run \"qs-front\" to start the frontend\nrun \"qs-back\" to start the backend${NC}\n"
+    printf  "${CYAN}\n\n\nrun \"qs-front\" to start the frontend\nor\nrun \"qs-back\" to start the backend${NC}\n"
 }

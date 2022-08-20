@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 import SettingsRightPanel from './SettingsRightPanel'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
-import { ReactComponent as QuackSnack } from '../logo/QS_Icon_Dark.svg'
+import { ReactComponent as QuackSnack } from '../assets/logo/QS_Icon_Dark.svg'
 
 function NavBar() {
   const [openPanel, setOpenPanel] = useState(false)

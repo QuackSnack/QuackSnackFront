@@ -1,5 +1,7 @@
 # Description
 
+![Quack Snack Logo](https://github.com/QuackSnack/QuackSnackFront/blob/main/front/src/assets/logo/QuackLogo_Dark.png?raw=true)
+
 This project contains the frontend of a web-application called **QuickSnack** *(for a quick snack)* that propose the typical services of any food chain. It is made purely as an educationnal purpose.
 
 Click here to see the [backend](https://github.com/QuackSnack/QuackSnackBack).

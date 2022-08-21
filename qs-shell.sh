@@ -5,14 +5,14 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 declare DATABASE_HOST="localhost"
-
 declare DATABASE_PORT="5432"
-
 declare DATABASE_NAME="qs_database"
-
 declare DATABASE_USER="qs_user"
-    
 declare DATABASE_PASSWORD="qs_password"
+
+declare DJANGO_SUPERUSER_EMAIL="quacksnack@quack.snack"
+declare DJANGO_SUPERUSER_PASSWORD='qs_admin_password'
+declare DJANGO_SUPERUSER_USERNAME='qs_admin'
 
 # Runs the frontend
 function qs-front() {
@@ -25,6 +25,15 @@ function qs-back() {
         sudo service postgresql start    
     fi
     (cd $HOME/dev/QuackSnackBack/back && source env/bin/activate && python3 manage.py runserver)
+}
+
+# Get into the backend's environment
+function qs-superuser() {
+    printf  "${CYAN}creating superuser for Django${NC}\n"
+    export DJANGO_SUPERUSER_USERNAME
+    export DJANGO_SUPERUSER_PASSWORD
+    export DJANGO_SUPERUSER_EMAIL
+    (cd $HOME/dev/QuackSnackBack/back && source env/bin/activate && ./manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL)
 }
 
 # Push the changes on every projects
@@ -125,6 +134,7 @@ function qs-quick-install() {
     qs-libs
     qs-pass
     qs-database "create"
+    qs-superuser
     qs-projects
     printf  "${CYAN}\n\n\nrun \"qs-front\" to start the frontend\nor\nrun \"qs-back\" to start the backend${NC}\n"
 }

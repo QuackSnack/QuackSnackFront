@@ -1,0 +1,8 @@
+.food-card {
+  display: block;
+  width: 200px;
+  height: 200px;
+  & .food-card-image {
+    height: 110px;
+  }
+}

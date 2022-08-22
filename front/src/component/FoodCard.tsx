@@ -4,16 +4,18 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 
-function FoodCard() {
+function FoodCard(props: { food: any }) {
+  const { food } = props
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia component='img' height='140' image='/static/images/cards/contemplative-reptile.jpg' alt='green iguana' />
+    <Card className='food-card'>
+      <CardMedia component='img' className='food-card-image' image={`/images/${food.image}`} alt='Image not working' />
       <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
-          Lizard
+        <Typography gutterBottom variant='h6' component='div'>
+          {food.name} | {food.price} €
         </Typography>
         <Typography variant='body2' color='text.secondary'>
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica
+          {food.description}
         </Typography>
       </CardContent>
     </Card>

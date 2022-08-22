@@ -3,6 +3,8 @@
 @import 'home.scss';
 @import 'signmodals.scss';
 @import 'restaurant.scss';
+@import 'foodlist.scss';
+@import 'foodcard.scss';
 
 
 :root {
@@ -11,4 +13,8 @@
   --third-color: #e0fbfc;
   --accent-color: #ee6c4d;
   --fourth-color: #293241;
+}
+
+.main-frame {
+  margin: 80px 2% 2% 2%;
 }

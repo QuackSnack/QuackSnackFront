@@ -21,12 +21,6 @@ function NavBar() {
       <Link className={useLocation().pathname === '/restaurant' ? 'navbar-title active-title' : 'navbar-title'} to='/restaurant'>
         <Typography variant='h4'>Restaurants</Typography>
       </Link>
-      <Link className={useLocation().pathname === '/article' ? 'navbar-title active-title' : 'navbar-title'} to='/article'>
-        <Typography variant='h4'>Articles</Typography>
-      </Link>
-      <Link className={useLocation().pathname === '/menu' ? 'navbar-title active-title' : 'navbar-title'} to='/menu'>
-        <Typography variant='h4'>Menus</Typography>
-      </Link>
       <div className='navbar-right'>
         {isLoggedIn ? (
           <Link to='/user'>

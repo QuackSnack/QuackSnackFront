@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Typography } from '@mui/material'
+import FoodCard from '../component/FoodCard'
 
 function Restaurant() {
   const [restaurants, setRestaurants] = useState<any[]>([])
@@ -22,15 +24,15 @@ function Restaurant() {
   }, [])
 
   return (
-    <div>
-      <h1>Restaurant</h1>
-      <div>
-        <ul>
-          {restaurants.map((restaurant) => (
-            <li key={restaurant.id}>{restaurant.username}</li>
-          ))}
-        </ul>
-      </div>
+    <div className='frame'>
+      {restaurants.map((restaurant) => (
+        <div key={restaurant.id}>
+          <Typography variant='h4'>{restaurant.username}</Typography>
+          <div>
+            <FoodCard />
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

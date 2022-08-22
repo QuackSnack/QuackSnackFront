@@ -56,13 +56,13 @@ function qs-merge-main() {
     (cd $HOME/dev/QuackSnackBack  && git checkout main
     if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
         printf  "${CYAN}merging QuackSnackBack${NC}\n"
-        git pull origin main && git merge dev && git push && git checkout dev
+        git pull origin main && git merge dev && git push && git checkout dev && git pull origin main && git push
     fi)
 
     (cd $HOME/dev/QuackSnackFront  && git checkout main
     if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
         printf  "${CYAN}merging QuackSnackFront${NC}\n"
-        git pull origin main && git merge dev && git push && git checkout dev
+        git pull origin main && git merge dev && git push && git checkout dev && git pull origin main && git push
     fi)
 }
 

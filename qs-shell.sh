@@ -27,7 +27,17 @@ function qs-back() {
     (cd $HOME/dev/QuackSnackBack/back && source env/bin/activate && python3 manage.py runserver)
 }
 
-# Get into the backend's environment
+# Turn on/off the backend's environment
+function qs-venv() {
+    if [[ -z "$VIRTUAL_ENV" ]]; then
+    printf  "${CYAN}activating virtual env${NC}\n"
+        cd $HOME/dev/QuackSnackBack/back && source env/bin/activate
+    else
+        printf  "${CYAN}deactivating virtual env${NC}\n"
+        deactivate && cd $HOME/dev/QuackSnackBack/back
+    fi
+}
+# Set a superuser for Django admin
 function qs-superuser() {
     printf  "${CYAN}creating superuser for Django${NC}\n"
     export DJANGO_SUPERUSER_USERNAME

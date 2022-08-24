@@ -50,14 +50,18 @@ function qs-superuser() {
 function qs-push-dev() {
     (cd $HOME/dev/QuackSnackBack
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-        printf  "${CYAN}pushing to QuackSnackBack${NC}\n"
+        printf  "${CYAN}pushing to QuackSnackBack dev${NC}\n"
         cd $HOME/dev/QuackSnackBack && git add . && git commit -m "Push: `date +'%d-%m-%Y %H:%M:%S'`" && git push
+    else
+        printf  "${RED}not on dev branch${NC}\n"
     fi)
 
     (cd $HOME/dev/QuackSnackFront
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-        printf  "${CYAN}pushing to QuackSnackFront${NC}\n"
+        printf  "${CYAN}pushing to QuackSnackFront dev${NC}\n"
         cd $HOME/dev/QuackSnackFront && git add . && git commit -m "Push: `date +'%d-%m-%Y %H:%M:%S'`" && git push
+    else
+        printf  "${RED}not on dev branch${NC}\n"
     fi)
 }
 
@@ -65,13 +69,13 @@ function qs-push-dev() {
 function qs-merge-main() {
     (cd $HOME/dev/QuackSnackBack  && git checkout main
     if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-        printf  "${CYAN}merging QuackSnackBack${NC}\n"
+        printf  "${CYAN}merging QuackSnackBack dev into main${NC}\n"
         git pull origin main && git merge dev && git push && git checkout dev && git pull origin main && git push
     fi)
 
     (cd $HOME/dev/QuackSnackFront  && git checkout main
     if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-        printf  "${CYAN}merging QuackSnackFront${NC}\n"
+        printf  "${CYAN}merging QuackSnackFront dev into main${NC}\n"
         git pull origin main && git merge dev && git push && git checkout dev && git pull origin main && git push
     fi)
 }

@@ -14,9 +14,20 @@ function FoodCard(props: { food: any }) {
         <Typography gutterBottom variant='h6' component='div'>
           {food.name} | {food.price} €
         </Typography>
-        <Typography variant='body2' color='text.secondary'>
-          {food.description}
-        </Typography>
+        {'articles' in food ? (
+          <Typography variant='body2' color='text.secondary'>
+            {food.articles.map((article: any, index: number) => {
+              if (index + 1 === food.articles.length) {
+                return `${article.name}.`
+              }
+              return `${article.name}, `
+            })}
+          </Typography>
+        ) : (
+          <Typography variant='body2' color='text.secondary'>
+            {food.description}
+          </Typography>
+        )}
       </CardContent>
     </Card>
   )

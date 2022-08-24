@@ -18,7 +18,7 @@ function FoodCard(props: { food: any }) {
           <Typography variant='body2' color='text.secondary'>
             {food.articles.map((article: any, index: number) => {
               if (index + 1 === food.articles.length) {
-                return `${article.name}.`
+                return `and ${article.name}.`
               }
               return `${article.name}, `
             })}

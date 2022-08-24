@@ -17,9 +17,9 @@ function FoodCard(props: { food: any }) {
       : food.description
 
   return (
-    <Card className='food-card'>
+    <Card className='food-card' style={{backgroundColor: "var(--third-color)"}}>
       <CardMedia component='img' className='food-card-image' image={`/images/${food.image}`} alt='Image not working' />
-      <CardContent>
+      <CardContent className='food-card-content'>
         <Typography variant='h6' className='food-card-name' component='div'>
           {food.name}
         </Typography>

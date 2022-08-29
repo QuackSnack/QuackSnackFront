@@ -46,6 +46,29 @@ function qs-superuser() {
   (cd $HOME/dev/QuackSnackBack/back && source env/bin/activate && ./manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL)
 }
 
+# Pull the changes of both projects
+function qs-pull-dev() {
+  (
+    cd $HOME/dev/QuackSnackFront
+    if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
+      printf "${CYAN}pulling QuackSnackFront dev${NC}\n"
+      cd $HOME/dev/QuackSnackFront && git pull
+    else
+      printf "${RED}not on dev branch${NC}\n"
+    fi
+  )
+
+  (
+    cd $HOME/dev/QuackSnackBack
+    if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
+      printf "${CYAN}pulling QuackSnackBack dev${NC}\n"
+      cd $HOME/dev/QuackSnackBack && git pull
+    else
+      printf "${RED}not on dev branch${NC}\n"
+    fi
+  )
+}
+
 # Push the changes of both projects
 function qs-push-dev() {
   (

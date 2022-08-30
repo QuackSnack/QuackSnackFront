@@ -37,6 +37,7 @@ function qs-venv() {
     deactivate && cd $HOME/dev/QuackSnackBack/back
   fi
 }
+
 # Set a superuser for Django admin
 function qs-superuser() {
   printf "${CYAN}creating superuser for Django${NC}\n"

@@ -69,7 +69,7 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
 
   return (
     <div>
-      <Dialog open={open}>
+      <Dialog open={open} onClose={() => setOpen('')}>
         <DialogTitle>Create your account</DialogTitle>
         <Divider />
         <DialogContent>

@@ -9,12 +9,7 @@ function Restaurant() {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:8000/restaurants/', {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
-      })
+      .get('http://127.0.0.1:8000/restaurants/')
       .then((res) => {
         setRestaurants(res.data.data)
       })

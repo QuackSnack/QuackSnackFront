@@ -61,3 +61,17 @@ qs-shell.sh
 README.md
 ```
 
+## TODO
+
+```
+Frontend
+  Language swapping
+  Theme swapping
+  Restaurant interface
+  Redirect users not logged in
+
+Backend
+  Restaurant logic
+  Django authentification
+```
+

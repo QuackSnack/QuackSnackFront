@@ -9,7 +9,7 @@ function Restaurant() {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:8000/restaurants/')
+      .get('http://localhost:8000/restaurants/')
       .then((res) => {
         setRestaurants(res.data.data)
       })

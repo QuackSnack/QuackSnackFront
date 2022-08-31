@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -12,14 +13,14 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
   const { open } = props
   const { setOpen } = props
 
-  function getCookie(name:any) {
+  function getCookie(name: string) {
     let cookieValue = null
     if (document.cookie && document.cookie !== '') {
       const cookies = document.cookie.split(';')
       for (let i = 0; i < cookies.length; i + 1) {
         const cookie = cookies[i].trim()
         // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === `${name}=`) {
+        if (cookie.substring(0, name.length + 1) === `${name  }=`) {
           cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
           break
         }
@@ -31,12 +32,8 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
   const handleSubmit = (event: any) => {
     event.preventDefault()
 
-    // eslint-disable-next-line no-console
-    console.log(getCookie('csrftoken'))
-    const csrfCookie = getCookie('csrftoken')
-
     axios.post(
-      'http://127.0.0.1:8000/test/',
+      'http://localhost:8000/test/',
       {
         next: '/',
         username: 'admin@admin.com',
@@ -44,10 +41,15 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
       },
       {
         headers: {
-          'X-CSRFToken': csrfCookie,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('X-CSRFToken'),
         },
+        withCredentials: true,
       },
-    )
+    ).then((res) => {
+      console.log(res)
+    })
   }
 
   return (
@@ -56,6 +58,7 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
         <DialogTitle id='scroll-dialog-title'>Sign in</DialogTitle>
         <Divider />
         <form onSubmit={handleSubmit}>
+          <input type='hidden' name='csrfmiddlewaretoken' value={getCookie('X-CSRFToken')} />
           <DialogContent>
             <Grid container spacing={1}>
               <Grid item xs={12}>

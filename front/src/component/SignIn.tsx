@@ -20,7 +20,7 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
       for (let i = 0; i < cookies.length; i + 1) {
         const cookie = cookies[i].trim()
         // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === `${name  }=`) {
+        if (cookie.substring(0, name.length + 1) === `${name}=`) {
           cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
           break
         }
@@ -32,24 +32,26 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
   const handleSubmit = (event: any) => {
     event.preventDefault()
 
-    axios.post(
-      'http://localhost:8000/test/',
-      {
-        next: '/',
-        username: 'admin@admin.com',
-        password: 'Cancun10!',
-      },
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCookie('X-CSRFToken'),
+    axios
+      .post(
+        'http://localhost:8000/test/',
+        {
+          next: '/',
+          username: 'admin@admin.com',
+          password: 'Cancun10!',
         },
-        withCredentials: true,
-      },
-    ).then((res) => {
-      console.log(res)
-    })
+        {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('X-CSRFToken'),
+          },
+          withCredentials: true,
+        },
+      )
+      .then((res) => {
+        console.log(res)
+      })
   }
 
   return (

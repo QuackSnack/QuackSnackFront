@@ -7,51 +7,19 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { Button, Divider } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
-import axios from 'axios'
+import getCookie from '../plugins/getCookie'
+import request from '../plugins/request'
 
 function SignIn(props: { open: boolean; setOpen: Function }) {
   const { open } = props
   const { setOpen } = props
 
-  function getCookie(name: string) {
-    let cookieValue = null
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';')
-      for (let i = 0; i < cookies.length; i + 1) {
-        const cookie = cookies[i].trim()
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === `${name}=`) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
-          break
-        }
-      }
-    }
-    return cookieValue
-  }
-
   const handleSubmit = (event: any) => {
     event.preventDefault()
 
-    axios
-      .post(
-        'http://localhost:8000/test/',
-        {
-          next: '/',
-          username: 'admin@admin.com',
-          password: 'Cancun10!',
-        },
-        {
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('X-CSRFToken'),
-          },
-          withCredentials: true,
-        },
-      )
-      .then((res) => {
-        console.log(res)
-      })
+    request.post('test/').then((res) => {
+      console.log(res)
+    })
   }
 
   return (

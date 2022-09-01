@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { Typography } from '@mui/material'
 import Stack from '@mui/material/Stack'
+import request from '../plugins/request'
 import FoodList from '../component/FoodList'
 
 function Restaurant() {
   const [restaurants, setRestaurants] = useState<any[]>([])
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8000/restaurants/')
-      .then((res) => {
-        setRestaurants(res.data.data)
-      })
+    request.get('restaurants/').then((res) => {
+      setRestaurants(res.data.data)
+    })
   }, [])
 
   return (

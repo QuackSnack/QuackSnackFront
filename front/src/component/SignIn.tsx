@@ -16,8 +16,10 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
-
-    request.post('test/').then((res) => {
+    const data = {
+      user:'usre'
+    }
+    request.post('test/', data).then((res) => {
       console.log(res)
     })
   }

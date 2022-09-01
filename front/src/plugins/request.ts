@@ -5,8 +5,8 @@ const request = axios.create({
   baseURL: 'http://localhost:8000/',
   timeout: 3000,
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+    Accept: 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/x-www-form-urlencoded',
     'X-CSRFToken': getCookie('X-CSRFToken'),
   },
   withCredentials: true,

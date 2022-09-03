@@ -8,9 +8,15 @@ function Restaurant() {
   const [restaurants, setRestaurants] = useState<any[]>([])
 
   useEffect(() => {
-    request.get('restaurants/').then((res) => {
-      setRestaurants(res.data.data)
-    })
+    request
+      .get('get-all/restaurant/')
+      .then((res) => {
+        setRestaurants(res.data.data)
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err)
+      })
   }, [])
 
   return (

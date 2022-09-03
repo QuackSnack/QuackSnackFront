@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React from 'react'
+import React, { useState } from 'react'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
@@ -13,13 +13,22 @@ import request from '../plugins/request'
 function SignIn(props: { open: boolean; setOpen: Function }) {
   const { open } = props
   const { setOpen } = props
+  const [formValue, setformValue] = useState({
+    username: '',
+    password: '',
+  })
+
+  const handleChange = (event: { target: { name: string; value: string } }) => {
+    setformValue({
+      ...formValue,
+      [event.target.name]: event.target.value,
+    })
+  }
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
-    const data = {
-      user:'usre'
-    }
-    request.post('test/', data).then((res) => {
+
+    request.post('sign-in/', formValue).then((res) => {
       console.log(res)
     })
   }
@@ -34,10 +43,10 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
           <DialogContent>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <TextField className='text-field' label='Username' variant='outlined' color='success' name='username' />
+                <TextField className='text-field' label='Username' variant='outlined' color='success' name='username' onChange={handleChange} value={formValue.username} />
               </Grid>
               <Grid item xs={12}>
-                <TextField className='text-field' label='Password' variant='outlined' color='success' type='password' name='password' />
+                <TextField className='text-field' label='Password' variant='outlined' color='success' type='password' name='password' onChange={handleChange} value={formValue.password}/>
               </Grid>
             </Grid>
           </DialogContent>

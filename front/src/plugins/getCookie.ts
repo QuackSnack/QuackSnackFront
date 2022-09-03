@@ -1,6 +1,6 @@
 
 function getCookie(name: string) {
-  let cookieValue = null
+  let cookieValue = ''
   if (document.cookie && document.cookie !== '') {
     const cookies = document.cookie.split(';')
     for (let i = 0; i < cookies.length; i + 1) {

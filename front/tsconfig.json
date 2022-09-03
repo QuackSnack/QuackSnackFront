@@ -22,7 +22,7 @@
     "strictNullChecks": false
   },
   "include": [
-    "src",
+    "src/**/*.ts(x)",
     "src/components",
     "src/custom.d.ts"
   ]

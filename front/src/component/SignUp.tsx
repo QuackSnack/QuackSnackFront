@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import { Button, Divider, Typography } from '@mui/material'
+import { Button, Divider, Typography, Snackbar } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
@@ -13,6 +13,7 @@ import request from '../plugins/request'
 function SignUp(props: { open: boolean; setOpen: Function }) {
   const { open } = props
   const { setOpen } = props
+  const [snackbarMessage, setsnackbarMessage] = useState('')
   const [formValue, setformValue] = useState({
     email: '',
     username: '',
@@ -35,11 +36,15 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
-
-    request.post('sign-up/', formValue).then((res) => {
-      // eslint-disable-next-line no-console
-      console.log(res)
-    })
+    request
+      .post('sign-up/', formValue)
+      .then((res) => {
+        setsnackbarMessage(res.data.message)
+        setOpen('')
+      })
+      .catch((err) => {
+        setsnackbarMessage(err.response.data.message)
+      })
   }
 
   return (
@@ -52,13 +57,33 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
           <DialogContent>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <TextField value={formValue.email} onChange={handleChange} name='email' className='text-field' label='Email address' variant='outlined' color='success' type='email' required />
+                <TextField
+                  value={formValue.email}
+                  onChange={handleChange}
+                  name='email'
+                  className='text-field'
+                  label='Email address'
+                  variant='outlined'
+                  color='success'
+                  type='email'
+                  required
+                />
               </Grid>
               <Grid item xs={6}>
                 <TextField value={formValue.username} onChange={handleChange} name='username' className='text-field' label='Username' variant='outlined' color='success' required />
               </Grid>
               <Grid item xs={6}>
-                <TextField value={formValue.password} onChange={handleChange} name='password' className='text-field' label='Password' variant='outlined' color='success' type='password' required />
+                <TextField
+                  value={formValue.password}
+                  onChange={handleChange}
+                  name='password'
+                  className='text-field'
+                  label='Password'
+                  variant='outlined'
+                  color='success'
+                  type='password'
+                  required
+                />
               </Grid>
               <Grid item xs={6}>
                 <TextField
@@ -74,10 +99,28 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
                 />
               </Grid>
               <Grid item xs={6}>
-                <TextField value={formValue.firstName} onChange={handleChange} name='firstName' className='text-field' label='First name' variant='outlined' color='success' required />
+                <TextField
+                  value={formValue.firstName}
+                  onChange={handleChange}
+                  name='firstName'
+                  className='text-field'
+                  label='First name'
+                  variant='outlined'
+                  color='success'
+                  required
+                />
               </Grid>
               <Grid item xs={6}>
-                <TextField value={formValue.lastName} onChange={handleChange} name='lastName' className='text-field' label='Last name' variant='outlined' color='success' required />
+                <TextField
+                  value={formValue.lastName}
+                  onChange={handleChange}
+                  name='lastName'
+                  className='text-field'
+                  label='Last name'
+                  variant='outlined'
+                  color='success'
+                  required
+                />
               </Grid>
               <Grid item xs={6}>
                 <TextField value={formValue.town} onChange={handleChange} name='town' className='text-field' label='Town' variant='outlined' color='success' required />
@@ -86,7 +129,16 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
                 <TextField value={formValue.country} onChange={handleChange} name='country' className='text-field' label='Country' variant='outlined' color='success' required />
               </Grid>
               <Grid item xs={6}>
-                <TextField value={formValue.streetName} onChange={handleChange} name='streetName' className='text-field' label='Street name' variant='outlined' color='success' required />
+                <TextField
+                  value={formValue.streetName}
+                  onChange={handleChange}
+                  name='streetName'
+                  className='text-field'
+                  label='Street name'
+                  variant='outlined'
+                  color='success'
+                  required
+                />
               </Grid>
               <Grid item xs={6}>
                 <TextField value={formValue.role} onChange={handleChange} name='role' className='text-field' select label='Role' color='success' required>
@@ -96,6 +148,13 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
               </Grid>
             </Grid>
             <Typography variant='caption'>* : field required.</Typography>
+            <Snackbar
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+              onClose={() => setsnackbarMessage('')}
+              open={snackbarMessage !== ''}
+              message={snackbarMessage}
+              autoHideDuration={3000}
+            />
           </DialogContent>
           <Divider />
           <DialogActions>

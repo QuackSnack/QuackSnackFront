@@ -31,13 +31,21 @@ This will install the shell in your `~/.bashrc` file. Here is an overview of the
 
 * `qs-install` : Install the shell.
 * `qs-remove` : Remove the shell.
-* `qs-libs` : Install the global libraries required to run both projects.
-* `qs-pass` : Change the superuser's password of the PostgreSQL database.
-* `qs-database [create|drop]` : Create or delete the database and its user.
-* `qs-projects` : Pull both projects and install the local libraries required.
-* `qs-push` : Push the modifications on both projects.
+* `qs-packages` : Install the global packages required to run both projects (Python, PostgreSQL, npm, Node, etc ...).
+* `qs-libs` : Install the local libraries required to run both projects (Python, PostgreSQL, Node, etc ...).
+* `qs-pass` : Change the superuser's password of the PostgreSQL database (node_modules for React and env for Python).
+* `qs-database-create` : Create the database and its user.
+* `qs-database-drop` : Delete the database and its user.
+* `qs-projects` : Clone both projects.
+* `qs-pull-dev` : Pull the modifications from the dev branch for both projects.
+* `qs-push-dev` : Push the modifications to the dev branch for both projects.
+* `qs-merge-main` : Merge the main branch into the dv branch for both projects.
+* `qs-superuser` : Create a superuser for Django admin.
+* `qs-venv` : Turn on/off the backend's environment.
 * `qs-front` : Start the frontend application.
 * `qs-back` : Start the backend application.
+
+* `qs-quick-install` : Install everything required to run both projects. Executes in this order:  `qs-projects`, `qs-install`, `qs-packages`, `qs-pass`, `qs-database-create`, `qs-superuser` and `qs-libs`.
 
 ## Versions
 

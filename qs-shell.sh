@@ -153,7 +153,7 @@ function qs-database-drop() {
 }
 
 # Installs the global packages
-function qs-package() {
+function qs-packages() {
   printf "${CYAN}installing packages and libraries${NC}\n"
   (
     sudo apt update -y
@@ -165,14 +165,12 @@ function qs-package() {
     sudo n prune
     sudo npm install -g npm@latest
   )
-
 }
 
 # Installs the local libraries
 function qs-libs() {
   (cd $HOME/dev/QuackSnackFront && git checkout dev && cd front/ && npm install)
   (cd $HOME/dev/QuackSnackBack && git checkout dev && cd back/ && python3 -m venv env && source env/bin/activate && pip install -r requirements.txt && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json && deactivate)
-
 }
 
 # Remove the qs shell
@@ -189,8 +187,10 @@ function qs-remove() {
 # Pulls the projects
 function qs-projects() {
   mkdir -p $HOME/dev
-  (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackBack.git)
-  (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackFront.git)
+  (
+    cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackBack.git
+    cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackFront.git
+  )
 }
 
 # Installs the qs shell
@@ -220,7 +220,7 @@ function qs-quick-install() {
   (
     qs-projects
     qs-install
-    qs-package
+    qs-packages
     qs-pass
     qs-database-create
     qs-superuser

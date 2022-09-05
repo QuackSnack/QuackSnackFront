@@ -32,8 +32,8 @@ This will install the shell in your `~/.bashrc` file. Here is an overview of the
 * `qs-install` : Install the shell.
 * `qs-remove` : Remove the shell.
 * `qs-packages` : Install the global packages required to run both projects (Python, PostgreSQL, npm, Node, etc ...).
-* `qs-libs` : Install the local libraries required to run both projects (Python, PostgreSQL, Node, etc ...).
-* `qs-pass` : Change the superuser's password of the PostgreSQL database (node_modules for React and env for Python).
+* `qs-libs` : Install the local libraries required to run both projects (node_modules for React and env for Python).
+* `qs-pass` : Change the superuser's password of the PostgreSQL database.
 * `qs-database-create` : Create the database and its user.
 * `qs-database-drop` : Delete the database and its user.
 * `qs-projects` : Clone both projects.

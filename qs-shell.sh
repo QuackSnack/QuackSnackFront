@@ -170,9 +170,9 @@ function qs-package() {
 
 # Installs the local libraries
 function qs-libs() {
-
-  (cd $HOME/dev/QuackSnackBack && git checkout dev && cd back/ && python3 -m venv env && source env/bin/activate && pip install -r requirements.txt && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json && deactivate)
   (cd $HOME/dev/QuackSnackFront && git checkout dev && cd front/ && npm install)
+  (cd $HOME/dev/QuackSnackBack && git checkout dev && cd back/ && python3 -m venv env && source env/bin/activate && pip install -r requirements.txt && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json && deactivate)
+
 }
 
 # Remove the qs shell
@@ -217,13 +217,15 @@ function qs-install() {
 # Installs all the requirements
 function qs-quick-install() {
   printf "${CYAN}making a quick install${NC}\n"
-  qs-projects
-  qs-install
-  qs-package
-  qs-pass
-  qs-database-create
-  qs-superuser
-  qs-libs
+  (
+    qs-projects
+    qs-install
+    qs-package
+    qs-pass
+    qs-database-create
+    qs-superuser
+    qs-libs
+  )
   printf "${CYAN}\n\n\nrun \"qs-front\" to start the frontend\nor\nrun \"qs-back\" to start the backend${NC}\n"
 }
 

@@ -119,44 +119,60 @@ function qs-merge-main() {
 # Change the password of the database superuser
 function qs-pass() {
   printf "${CYAN}configuring database${NC}\n"
-  sudo sed -i 's/peer/trust/g' /etc/postgresql/*/main/pg_hba.conf
-  sudo sed -i 's/md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
-  sudo service postgresql restart
-  psql -U postgres -d template1 -c "ALTER USER postgres PASSWORD '$DATABASE_PASSWORD';"
-  sudo printf "$DATABASE_HOST:$DATABASE_PORT:$DATABASE_NAME:$DATABASE_USER:$DATABASE_PASSWORD" >~/.pgpass
-  sudo chmod 0600 ~/.pgpass
-  sudo sed -i 's/trust/md5/g' /etc/postgresql/*/main/pg_hba.conf
-  sudo service postgresql restart
+  (
+    sudo sed -i 's/peer/trust/g' /etc/postgresql/*/main/pg_hba.conf
+    sudo sed -i 's/md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+    sudo service postgresql restart
+    psql -U postgres -d template1 -c "ALTER USER postgres PASSWORD '$DATABASE_PASSWORD';"
+    sudo printf "$DATABASE_HOST:$DATABASE_PORT:$DATABASE_NAME:$DATABASE_USER:$DATABASE_PASSWORD" >~/.pgpass
+    sudo chmod 0600 ~/.pgpass
+    sudo sed -i 's/trust/md5/g' /etc/postgresql/*/main/pg_hba.conf
+    sudo service postgresql restart
+  )
 }
 
 # Create or drop the qs dabatase
 function qs-database-create() {
   printf "${CYAN}creating database${NC}\n"
-  sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD createdb $DATABASE_NAME
+  (sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD createdb $DATABASE_NAME)
   printf "${CYAN}adding user${NC}\n"
-  sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d $DATABASE_NAME -c "create user $DATABASE_USER with encrypted password '$DATABASE_PASSWORD';"
-  sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d $DATABASE_NAME -c "grant all privileges on database $DATABASE_NAME to $DATABASE_USER;"
+  (
+    sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d $DATABASE_NAME -c "create user $DATABASE_USER with encrypted password '$DATABASE_PASSWORD';"
+    sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d $DATABASE_NAME -c "grant all privileges on database $DATABASE_NAME to $DATABASE_USER;"
+  )
 }
 
 # Create or drop the qs dabatase
 function qs-database-drop() {
   printf "${CYAN}dropping database & user${NC}\n"
-  sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DATABASE_NAME';"
-  sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD dropdb $DATABASE_NAME -e
-  sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD dropuser qs_user -e
+  (
+    sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DATABASE_NAME';"
+    sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD dropdb $DATABASE_NAME -e
+    sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD dropuser qs_user -e
+  )
 }
 
-# Installs all required libraries
-function qs-libs() {
+# Installs the global packages
+function qs-package() {
   printf "${CYAN}installing packages and libraries${NC}\n"
-  sudo apt update -y
-  sudo apt upgrade -y
-  sudo apt install -y python3 python3-pip python3-venv postgresql postgresql-contrib libpq-dev nodejs npm
-  sudo service postgresql start
-  sudo npm install -g n
-  sudo n stable
-  sudo n prune
-  sudo npm install -g npm@latest
+  (
+    sudo apt update -y
+    sudo apt upgrade -y
+    sudo apt install -y python3 python3-pip python3-venv postgresql postgresql-contrib libpq-dev nodejs npm
+    sudo service postgresql start
+    sudo npm install -g n
+    sudo n stable
+    sudo n prune
+    sudo npm install -g npm@latest
+  )
+
+}
+
+# Installs the local libraries
+function qs-libs() {
+
+  (cd $HOME/dev/QuackSnackBack && git checkout dev && cd back/ && python3 -m venv env && source env/bin/activate && pip install -r requirements.txt && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json && deactivate)
+  (cd $HOME/dev/QuackSnackFront && git checkout dev && cd front/ && npm install)
 }
 
 # Remove the qs shell
@@ -173,12 +189,8 @@ function qs-remove() {
 # Pulls the projects
 function qs-projects() {
   mkdir -p $HOME/dev
-
   (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackBack.git)
-  (cd && cd $HOME/dev/QuackSnackBack && git checkout dev && cd back/ && python3 -m venv env && source env/bin/activate && pip install -r requirements.txt && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json && deactivate)
-
   (cd $HOME/dev && git clone git@github.com:QuackSnack/QuackSnackFront.git)
-  (cd && cd $HOME/dev/QuackSnackFront && git checkout dev && cd front/ && npm install)
 }
 
 # Installs the qs shell
@@ -205,11 +217,14 @@ function qs-install() {
 # Installs all the requirements
 function qs-quick-install() {
   printf "${CYAN}making a quick install${NC}\n"
+  qs-projects
   qs-install
-  qs-libs
+  qs-package
   qs-pass
   qs-database-create
   qs-superuser
-  qs-projects
+  qs-libs
   printf "${CYAN}\n\n\nrun \"qs-front\" to start the frontend\nor\nrun \"qs-back\" to start the backend${NC}\n"
 }
+
+# qs-shell end

@@ -23,6 +23,7 @@
   },
   "include": [
     "src/**/*.ts(x)",
+    "src/**/*",
     "src/components",
     "src/custom.d.ts"
   ]

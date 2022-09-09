@@ -1,7 +1,7 @@
-/* eslint-disable no-console */
-import React from 'react'
+import React, { useMemo } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import axios from 'axios'
+import { Context, reactContext } from './plugins/context'
 import NavBar from './component/NavBar'
 import Restaurant from './view/Restaurant'
 import Home from './view/Home'
@@ -14,16 +14,20 @@ function App() {
   axios.defaults.withCredentials = true
   axios.get('http://localhost:8000/tokenCSRF/')
 
+  const context = useMemo(() => (new Context()), []);
+
   return (
     <div>
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/restaurant' element={<Restaurant />} />
-          <Route path='/user' element={<User />} />
-        </Routes>
-      </BrowserRouter>
+      <reactContext.Provider value={context}>
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/restaurant' element={<Restaurant />} />
+            <Route path='/user' element={<User />} />
+          </Routes>
+        </BrowserRouter>
+      </reactContext.Provider>
     </div>
   )
 }

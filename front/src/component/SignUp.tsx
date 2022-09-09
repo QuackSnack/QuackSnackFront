@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import { Button, Divider, Typography, Snackbar } from '@mui/material'
+import { Button, Divider, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
@@ -13,7 +13,6 @@ import request from '../plugins/request'
 function SignUp(props: { open: boolean; setOpen: Function }) {
   const { open } = props
   const { setOpen } = props
-  const [snackbarMessage, setsnackbarMessage] = useState('')
   const [formValue, setformValue] = useState({
     email: '',
     username: '',
@@ -38,12 +37,12 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
     event.preventDefault()
     request
       .post('sign-up/', formValue)
-      .then((res) => {
-        setsnackbarMessage(res.data.message)
+      .then(() => {
         setOpen('')
       })
       .catch((err) => {
-        setsnackbarMessage(err.response.data.message)
+        // eslint-disable-next-line no-console
+        console.log(err)
       })
   }
 
@@ -148,13 +147,7 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
               </Grid>
             </Grid>
             <Typography variant='caption'>* : field required.</Typography>
-            <Snackbar
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-              onClose={() => setsnackbarMessage('')}
-              open={snackbarMessage !== ''}
-              message={snackbarMessage}
-              autoHideDuration={3000}
-            />
+            
           </DialogContent>
           <Divider />
           <DialogActions>

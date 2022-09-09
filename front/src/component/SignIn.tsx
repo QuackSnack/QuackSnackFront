@@ -1,21 +1,22 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import { Button, Divider, Snackbar } from '@mui/material'
+import { Button, Divider } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import getCookie from '../plugins/getCookie'
 import request from '../plugins/request'
+import { reactContext } from '../plugins/context'
 
 function SignIn(props: { open: boolean; setOpen: Function }) {
   const { open } = props
   const { setOpen } = props
-  const [snackbarMessage, setsnackbarMessage] = useState('')
+  const context: any = useContext(reactContext)
   const [formValue, setformValue] = useState({
-    username: '',
-    password: '',
+    username: 'Deconsenry',
+    password: 'password',
   })
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
@@ -29,12 +30,14 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
     event.preventDefault()
     request
       .post('sign-in/', formValue)
-      .then((res) => {
-        setsnackbarMessage(res.data.message)
+      .then(() => {
         setOpen('')
+        context.setUserLoggedIn('1')
+        window.location.reload()
       })
       .catch((err) => {
-        setsnackbarMessage(err.response.data.message)
+        // eslint-disable-next-line no-console
+        console.log(err)
       })
   }
 
@@ -63,13 +66,6 @@ function SignIn(props: { open: boolean; setOpen: Function }) {
                 />
               </Grid>
             </Grid>
-            <Snackbar
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-              onClose={() => setsnackbarMessage('')}
-              open={snackbarMessage !== ''}
-              message={snackbarMessage}
-              autoHideDuration={3000}
-            />
           </DialogContent>
           <Divider />
           <DialogActions>

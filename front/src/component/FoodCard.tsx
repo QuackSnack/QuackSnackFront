@@ -1,23 +1,26 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Tooltip, Typography } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
+import { reactContext } from '../plugins/context'
 
 function FoodCard(props: { food: any }) {
   const { food } = props
-  const description =
-    'articles' in food
-      ? food.articles.map((article: any, index: number) => {
-          if (index + 1 === food.articles.length) {
-            return `and ${article.name}.`
-          }
-          return `${article.name}, `
-        })
-      : food.description
+  const context: any = useContext(reactContext)
+  const [selected, setSelected] = useState(context.basketContent.some((item: any) => item.id === food.id))
+
+  const handleClick = () => {
+    context.addBasketContent(food)
+    if (context.basketContent.some((item: any) => item.id === food.id)) {
+      setSelected(true)
+    } else {
+      setSelected(false)
+    }
+  }
 
   return (
-    <Card className='food-card' style={{backgroundColor: "var(--third-color)"}}>
+    <Card raised={selected} className='food-card' style={{ backgroundColor: 'var(--third-color)' }} onClick={handleClick}>
       <CardMedia component='img' className='food-card-image' image={`/images/${food.image}`} alt='Image not working' />
       <CardContent className='food-card-content'>
         <Typography variant='h6' className='food-card-name' component='div'>
@@ -26,9 +29,9 @@ function FoodCard(props: { food: any }) {
         <Typography variant='h6' className='food-card-price' component='div'>
           {food.price} €
         </Typography>
-        <Tooltip title={<Typography variant='subtitle1'>{description}</Typography>} arrow>
+        <Tooltip title={<Typography variant='subtitle1'>{food.description}</Typography>} arrow>
           <Typography variant='body2' className='food-card-description' color='text.secondary'>
-            {description}
+            {food.description}
           </Typography>
         </Tooltip>
       </CardContent>

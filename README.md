@@ -4,13 +4,13 @@
   <img src="https://github.com/QuackSnack/QuackSnackFront/blob/main/front/src/assets/logo/QuackLogo_Dark.png?raw=true" alt="Quack Snack Logo"/>
 </p>
 
-This project contains the frontend of a web-application called **QuickSnack** *(for a quick snack)* that propose the typical services of any food chain. It is made purely as an educationnal purpose.
+This project contains the frontend of a web-application called **QuackSnack** *(for a quick snack)* that propose the typical services of any food chain. It is made purely as an educationnal purpose.
 
 Click here to see the [backend](https://github.com/QuackSnack/QuackSnackBack).
 
 # Setup
 
-This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/QuickSnackFront`.
+This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/QuackSnackFront`.
 
 ***WARNING : It is highly recommended to set this up on an empty distribution as it will probably mess with your current packages, libraries and database system.***
 

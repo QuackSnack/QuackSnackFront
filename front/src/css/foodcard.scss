@@ -2,8 +2,8 @@
   display: block;
   min-width: 200px;
   max-width: 200px;
-  min-height: 180px;
-  max-height: 180px;
+  min-height: 250px;
+  max-height: 250px;
   padding: 0px ;
 
   & .food-card-content {
@@ -11,7 +11,7 @@
   }
 
   & .food-card-image {
-    height: 70%;
+    height: 50%;
     background-color: white;
   }
 

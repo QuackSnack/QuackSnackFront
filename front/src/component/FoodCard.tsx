@@ -1,5 +1,6 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useContext, useState } from 'react'
-import { Tooltip, Typography } from '@mui/material'
+import { Tooltip, Typography, Chip, Stack } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -7,6 +8,7 @@ import { reactContext } from '../plugins/context'
 
 function FoodCard(props: { food: any }) {
   const { food } = props
+  console.log(food)
   const context: any = useContext(reactContext)
   const [selected, setSelected] = useState(context.basketContent.some((item: any) => item.id === food.id))
 
@@ -23,6 +25,10 @@ function FoodCard(props: { food: any }) {
     <Card raised={selected} className='food-card' style={{ backgroundColor: 'var(--third-color)' }} onClick={handleClick}>
       <CardMedia component='img' className='food-card-image' image={`/images/${food.image}`} alt='Image not working' />
       <CardContent className='food-card-content'>
+        
+      <Stack direction="row" spacing={1}>
+          {food.tag.map((t:{name:string}, index:number) => <Chip key={index} label={t.name} />)}
+        </Stack>
         <Typography variant='h6' className='food-card-name' component='div'>
           {food.name}
         </Typography>

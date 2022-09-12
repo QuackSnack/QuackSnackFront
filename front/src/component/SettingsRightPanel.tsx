@@ -1,9 +1,12 @@
 import { ReactElement, MouseEvent, useState } from 'react'
 import { Drawer, Switch, Typography, Stack, Divider, ToggleButtonGroup, ToggleButton } from '@mui/material'
 
-function SettingsRightPanel(props: { openPanel: boolean; setOpenPanel: Function }): ReactElement {
-  const { openPanel } = props
-  const { setOpenPanel } = props
+interface ChildProps {
+  openPanel: boolean
+  setOpenPanel: React.Dispatch<React.SetStateAction<string>>
+}
+
+function SettingsRightPanel({ openPanel, setOpenPanel }: ChildProps): ReactElement {
   const [view, setView] = useState('fr')
 
   const handleChange = (event: MouseEvent<HTMLElement>, nextView: string): void => {
@@ -13,7 +16,7 @@ function SettingsRightPanel(props: { openPanel: boolean; setOpenPanel: Function 
   }
 
   return (
-    <Drawer anchor="right" open={openPanel} onClose={() => setOpenPanel(!openPanel)}>
+    <Drawer anchor="right" open={openPanel} onClose={() => setOpenPanel('')}>
       <div className="drawer-panel">
         <Typography variant="h3">Settings</Typography>
         <Divider />

@@ -10,9 +10,12 @@ import MenuItem from '@mui/material/MenuItem'
 import getCookie from '../plugins/getCookie'
 import request from '../plugins/request'
 
-function SignUp(props: { open: boolean; setOpen: Function }): ReactElement {
-  const { open } = props
-  const { setOpen } = props
+interface ChildProps {
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<string>>
+}
+
+function SignUp({ open, setOpen }: ChildProps): ReactElement {
   const [formValue, setformValue] = useState({
     email: '',
     username: '',

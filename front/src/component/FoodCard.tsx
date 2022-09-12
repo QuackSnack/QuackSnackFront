@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import { reactContext } from '../plugins/context'
 
+
 function FoodCard(props: {
   food: {
     id: number

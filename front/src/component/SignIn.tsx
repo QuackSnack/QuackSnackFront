@@ -10,7 +10,12 @@ import getCookie from '../plugins/getCookie'
 import request from '../plugins/request'
 import { reactContext } from '../plugins/context'
 
-function SignIn(props: { open: boolean; setOpen: Function }): ReactElement {
+interface ChildProps {
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<string>>
+}
+
+function SignIn(props: { open: boolean; setOpen: any }): ReactElement {
   const { open } = props
   const { setOpen } = props
   const context: any = useContext(reactContext)

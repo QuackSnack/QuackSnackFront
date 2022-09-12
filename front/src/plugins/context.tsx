@@ -14,7 +14,6 @@ class Context {
     this.basketContent = localStorage.getItem('basketContent') ? JSON.parse(localStorage.getItem('basketContent')) : []
   }
 
-  // eslint-disable-next-line class-methods-use-this
   setUserLoggedIn(state: string): void {
     localStorage.setItem('userLoggedIn', state)
   }
@@ -27,12 +26,10 @@ class Context {
         id: item.id,
         name: item.name
       })
-      // eslint-disable-next-line no-console
       console.log(currentBasket)
       localStorage.setItem('basketContent', JSON.stringify(currentBasket))
     } else {
       currentBasket.splice(alreadyExists, 1)
-      // eslint-disable-next-line no-console
       console.log(currentBasket)
       localStorage.setItem('basketContent', JSON.stringify(currentBasket))
     }

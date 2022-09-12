@@ -16,7 +16,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module",
         "project": "./tsconfig.json",
-        "tsconfigRootDir": "./front"
+        "tsconfigRootDir": "../front"
     },
     "parser": "@typescript-eslint/parser",
     "plugins": [

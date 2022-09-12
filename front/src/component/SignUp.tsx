@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { ReactElement, useState } from 'react'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem'
 import getCookie from '../plugins/getCookie'
 import request from '../plugins/request'
 
-function SignUp(props: { open: boolean; setOpen: Function }) {
+function SignUp(props: { open: boolean; setOpen: Function }): ReactElement {
   const { open } = props
   const { setOpen } = props
   const [formValue, setformValue] = useState({
@@ -23,17 +23,17 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
     town: '',
     country: '',
     streetName: '',
-    role: '0',
+    role: '0'
   })
 
-  const handleChange = (event: { target: { name: string; value: string } }) => {
+  const handleChange = (event: { target: { name: string; value: string } }): void => {
     setformValue({
       ...formValue,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     })
   }
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: any): void => {
     event.preventDefault()
     request
       .post('sign-up/', formValue)
@@ -52,35 +52,35 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
         <DialogTitle>Create your account</DialogTitle>
         <Divider />
         <form onSubmit={handleSubmit}>
-          <input type='hidden' name='csrfmiddlewaretoken' value={getCookie('X-CSRFToken')} />
+          <input type="hidden" name="csrfmiddlewaretoken" value={getCookie('X-CSRFToken')} />
           <DialogContent>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <TextField
                   value={formValue.email}
                   onChange={handleChange}
-                  name='email'
-                  className='text-field'
-                  label='Email address'
-                  variant='outlined'
-                  color='success'
-                  type='email'
+                  name="email"
+                  className="text-field"
+                  label="Email address"
+                  variant="outlined"
+                  color="success"
+                  type="email"
                   required
                 />
               </Grid>
               <Grid item xs={6}>
-                <TextField value={formValue.username} onChange={handleChange} name='username' className='text-field' label='Username' variant='outlined' color='success' required />
+                <TextField value={formValue.username} onChange={handleChange} name="username" className="text-field" label="Username" variant="outlined" color="success" required />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   value={formValue.password}
                   onChange={handleChange}
-                  name='password'
-                  className='text-field'
-                  label='Password'
-                  variant='outlined'
-                  color='success'
-                  type='password'
+                  name="password"
+                  className="text-field"
+                  label="Password"
+                  variant="outlined"
+                  color="success"
+                  type="password"
                   required
                 />
               </Grid>
@@ -88,12 +88,12 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
                 <TextField
                   value={formValue.repeatedPassword}
                   onChange={handleChange}
-                  name='repeatedPassword'
-                  className='text-field'
-                  label='Repeated password'
-                  variant='outlined'
-                  color='success'
-                  type='password'
+                  name="repeatedPassword"
+                  className="text-field"
+                  label="Repeated password"
+                  variant="outlined"
+                  color="success"
+                  type="password"
                   required
                 />
               </Grid>
@@ -101,11 +101,11 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
                 <TextField
                   value={formValue.firstName}
                   onChange={handleChange}
-                  name='firstName'
-                  className='text-field'
-                  label='First name'
-                  variant='outlined'
-                  color='success'
+                  name="firstName"
+                  className="text-field"
+                  label="First name"
+                  variant="outlined"
+                  color="success"
                   required
                 />
               </Grid>
@@ -113,48 +113,47 @@ function SignUp(props: { open: boolean; setOpen: Function }) {
                 <TextField
                   value={formValue.lastName}
                   onChange={handleChange}
-                  name='lastName'
-                  className='text-field'
-                  label='Last name'
-                  variant='outlined'
-                  color='success'
+                  name="lastName"
+                  className="text-field"
+                  label="Last name"
+                  variant="outlined"
+                  color="success"
                   required
                 />
               </Grid>
               <Grid item xs={6}>
-                <TextField value={formValue.town} onChange={handleChange} name='town' className='text-field' label='Town' variant='outlined' color='success' required />
+                <TextField value={formValue.town} onChange={handleChange} name="town" className="text-field" label="Town" variant="outlined" color="success" required />
               </Grid>
               <Grid item xs={6}>
-                <TextField value={formValue.country} onChange={handleChange} name='country' className='text-field' label='Country' variant='outlined' color='success' required />
+                <TextField value={formValue.country} onChange={handleChange} name="country" className="text-field" label="Country" variant="outlined" color="success" required />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   value={formValue.streetName}
                   onChange={handleChange}
-                  name='streetName'
-                  className='text-field'
-                  label='Street name'
-                  variant='outlined'
-                  color='success'
+                  name="streetName"
+                  className="text-field"
+                  label="Street name"
+                  variant="outlined"
+                  color="success"
                   required
                 />
               </Grid>
               <Grid item xs={6}>
-                <TextField value={formValue.role} onChange={handleChange} name='role' className='text-field' select label='Role' color='success' required>
-                  <MenuItem value='0'>Client</MenuItem>
-                  <MenuItem value='1'>Restaurant</MenuItem>
+                <TextField value={formValue.role} onChange={handleChange} name="role" className="text-field" select label="Role" color="success" required>
+                  <MenuItem value="0">Client</MenuItem>
+                  <MenuItem value="1">Restaurant</MenuItem>
                 </TextField>
               </Grid>
             </Grid>
-            <Typography variant='caption'>* : field required.</Typography>
-            
+            <Typography variant="caption">* : field required.</Typography>
           </DialogContent>
           <Divider />
           <DialogActions>
-            <Button variant='outlined' color='secondary' onClick={() => setOpen('')}>
+            <Button variant="outlined" color="secondary" onClick={() => setOpen('')}>
               Cancel
             </Button>
-            <Button type='submit' variant='contained' color='secondary'>
+            <Button type="submit" variant="contained" color="secondary">
               Confirm
             </Button>
           </DialogActions>

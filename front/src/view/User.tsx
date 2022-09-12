@@ -1,11 +1,9 @@
-import React from 'react'
+import { ReactElement } from 'react'
 
-function User() {
+function User(): ReactElement {
   return (
     <div>
-      <h1>
-        User
-      </h1>
+      <h1>User</h1>
     </div>
   )
 }

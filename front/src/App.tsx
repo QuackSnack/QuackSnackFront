@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { ReactElement, useMemo } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import axios from 'axios'
 import { Context, reactContext } from './plugins/context'
@@ -7,14 +7,13 @@ import Restaurant from './view/Restaurant'
 import Home from './view/Home'
 import User from './view/User'
 
-function App() {
-
+function App(): ReactElement {
   axios.defaults.xsrfHeaderName = 'X-CSRFToken'
   axios.defaults.xsrfCookieName = 'csrftoken'
   axios.defaults.withCredentials = true
-  axios.get('http://localhost:8000/tokenCSRF/')
+  void axios.get('http://localhost:8000/tokenCSRF/')
 
-  const context = useMemo(() => (new Context()), []);
+  const context = useMemo(() => new Context(), [])
 
   return (
     <div>
@@ -22,9 +21,9 @@ function App() {
         <BrowserRouter>
           <NavBar />
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/restaurant' element={<Restaurant />} />
-            <Route path='/user' element={<User />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/restaurant" element={<Restaurant />} />
+            <Route path="/user" element={<User />} />
           </Routes>
         </BrowserRouter>
       </reactContext.Provider>

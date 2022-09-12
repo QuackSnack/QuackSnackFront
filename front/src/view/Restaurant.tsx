@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, ReactElement } from 'react'
 import { Typography } from '@mui/material'
 import Stack from '@mui/material/Stack'
 import request from '../plugins/request'
 import FoodList from '../component/FoodList'
 
-function Restaurant() {
+function Restaurant(): ReactElement {
   const [restaurants, setRestaurants] = useState<any[]>([])
 
   useEffect(() => {
@@ -20,13 +20,13 @@ function Restaurant() {
   }, [])
 
   return (
-    <div className='main-frame'>
+    <div className="main-frame">
       {restaurants.map((restaurant) => (
         <div key={restaurant.id}>
-          <Typography variant='h4'>{restaurant.username}</Typography>
-          <Stack direction='row' spacing={2}>
-            <FoodList foods={restaurant.articles} title='Articles' />
-            <FoodList foods={restaurant.menus} title='Menus' />
+          <Typography variant="h4">{restaurant.username}</Typography>
+          <Stack direction="row" spacing={2}>
+            <FoodList foods={restaurant.articles} title="Articles" />
+            <FoodList foods={restaurant.menus} title="Menus" />
           </Stack>
         </div>
       ))}

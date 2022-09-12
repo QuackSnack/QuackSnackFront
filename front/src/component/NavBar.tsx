@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
-import React, { useContext, useState } from 'react'
+import { ReactElement, useContext, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Typography } from '@mui/material'
-import { ManageAccounts, Settings , LogoutOutlined, ShoppingBasketOutlined } from '@mui/icons-material'
+import { ManageAccounts, Settings, LogoutOutlined, ShoppingBasketOutlined } from '@mui/icons-material'
 import Button from '@mui/material/Button'
 import SettingsRightPanel from './SettingsRightPanel'
 import BasketRightPanel from './BasketRightPanel'
@@ -12,12 +11,12 @@ import SignUp from './SignUp'
 import { ReactComponent as QuackSnack } from '../assets/logo/QS_Icon_Dark.svg'
 import request from '../plugins/request'
 
-function NavBar() {
+function NavBar(): ReactElement {
   const [openPanel, setOpenPanel] = useState('')
   const [openModal, setOpenModal] = useState('')
   const context: any = useContext(reactContext)
 
-  const logout = () => {
+  const logout = (): void => {
     request
       .post('log-out/')
       .then((res) => {
@@ -32,22 +31,22 @@ function NavBar() {
 
   if (context.userLoggedIn === '1') {
     return (
-      <nav className='navbar'>
-        <Link to='/'>
+      <nav className="navbar">
+        <Link to="/">
           <QuackSnack className={useLocation().pathname === '/' ? 'qs-logo active-qs' : 'qs-logo'} />
         </Link>
-        <Link className={useLocation().pathname === '/restaurant' ? 'navbar-title active-title' : 'navbar-title'} to='/restaurant'>
-          <Typography variant='h4'>Restaurants</Typography>
+        <Link className={useLocation().pathname === '/restaurant' ? 'navbar-title active-title' : 'navbar-title'} to="/restaurant">
+          <Typography variant="h4">Restaurants</Typography>
         </Link>
-        <div className='navbar-right'>
-          <Link to='/user'>
+        <div className="navbar-right">
+          <Link to="/user">
             <ManageAccounts className={useLocation().pathname === '/user' ? 'navbar-logo active-logo' : 'navbar-logo'} />
           </Link>
 
           <ShoppingBasketOutlined className={openPanel ? 'navbar-logo active-logo' : 'navbar-logo'} onClick={() => setOpenPanel('basket')} />
           <BasketRightPanel openPanel={openPanel === 'basket'} setOpenPanel={setOpenPanel} />
-          
-          <LogoutOutlined className='navbar-logo' onClick={() => logout()} />
+
+          <LogoutOutlined className="navbar-logo" onClick={() => logout()} />
 
           <Settings className={openPanel ? 'navbar-logo active-logo' : 'navbar-logo'} onClick={() => setOpenPanel('settings')} />
           <SettingsRightPanel openPanel={openPanel === 'settings'} setOpenPanel={setOpenPanel} />
@@ -59,19 +58,19 @@ function NavBar() {
     )
   }
   return (
-    <nav className='navbar'>
-      <Link to='/'>
+    <nav className="navbar">
+      <Link to="/">
         <QuackSnack className={useLocation().pathname === '/' ? 'qs-logo active-qs' : 'qs-logo'} />
       </Link>
-      <Link className={useLocation().pathname === '/restaurant' ? 'navbar-title active-title' : 'navbar-title'} to='/restaurant'>
-        <Typography variant='h4'>Restaurants</Typography>
+      <Link className={useLocation().pathname === '/restaurant' ? 'navbar-title active-title' : 'navbar-title'} to="/restaurant">
+        <Typography variant="h4">Restaurants</Typography>
       </Link>
-      <div className='navbar-right'>
-        <div className='sign-button-group'>
-          <Button variant='contained' color='primary' disableElevation onClick={() => setOpenModal('signin')}>
+      <div className="navbar-right">
+        <div className="sign-button-group">
+          <Button variant="contained" color="primary" disableElevation onClick={() => setOpenModal('signin')}>
             Sign in
           </Button>
-          <Button variant='outlined' color='primary' onClick={() => setOpenModal('signup')}>
+          <Button variant="outlined" color="primary" onClick={() => setOpenModal('signup')}>
             Sign up
           </Button>
         </div>

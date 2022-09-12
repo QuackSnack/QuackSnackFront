@@ -7,9 +7,9 @@ const request = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'X-CSRFToken': getCookie('X-CSRFToken'),
+    'X-CSRFToken': getCookie('X-CSRFToken')
   },
-  withCredentials: true,
-});
+  withCredentials: true
+})
 
 export default request

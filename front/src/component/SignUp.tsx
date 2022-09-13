@@ -7,8 +7,8 @@ import { Button, Divider, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
-import getCookie from '../plugins/getCookie'
-import request from '../plugins/request'
+import getCookie from '../plugin/getCookie'
+import request from '../plugin/request'
 
 interface ChildProps {
   open: boolean

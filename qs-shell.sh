@@ -30,17 +30,17 @@ function qs-back() {
 # Turn on/off the backend's environment
 function qs-venv() {
   if [[ -z "$VIRTUAL_ENV" ]]; then
-    printf "${CYAN}activating virtual env${NC}\n"
+    printf "${CYAN}Activating virtual env${NC}\n"
     cd $HOME/dev/QuackSnackBack/back && source env/bin/activate
   else
-    printf "${CYAN}deactivating virtual env${NC}\n"
+    printf "${CYAN}Deactivating virtual env${NC}\n"
     deactivate && cd $HOME/dev/QuackSnackBack/back
   fi
 }
 
 # Set a superuser for Django admin
 function qs-superuser() {
-  printf "${CYAN}creating superuser for Django${NC}\n"
+  printf "${CYAN}Creating superuser for Django${NC}\n"
   export DJANGO_SUPERUSER_USERNAME
   export DJANGO_SUPERUSER_PASSWORD
   export DJANGO_SUPERUSER_EMAIL
@@ -52,20 +52,20 @@ function qs-pull-dev() {
   (
     cd $HOME/dev/QuackSnackFront
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-      printf "${CYAN}pulling QuackSnackFront dev${NC}\n"
+      printf "${CYAN}Pulling QuackSnackFront dev${NC}\n"
       cd $HOME/dev/QuackSnackFront && git pull
     else
-      printf "${RED}not on dev branch${NC}\n"
+      printf "${RED}Not on dev branch${NC}\n"
     fi
   )
 
   (
     cd $HOME/dev/QuackSnackBack
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-      printf "${CYAN}pulling QuackSnackBack dev${NC}\n"
+      printf "${CYAN}Pulling QuackSnackBack dev${NC}\n"
       cd $HOME/dev/QuackSnackBack && git pull
     else
-      printf "${RED}not on dev branch${NC}\n"
+      printf "${RED}Not on dev branch${NC}\n"
     fi
   )
 }
@@ -75,20 +75,20 @@ function qs-push-dev() {
   (
     cd $HOME/dev/QuackSnackFront
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-      printf "${CYAN}pushing to QuackSnackFront dev${NC}\n"
+      printf "${CYAN}Pushing to QuackSnackFront dev${NC}\n"
       cd $HOME/dev/QuackSnackFront && git add . && git commit -m "Push: $(date +'%d-%m-%Y %H:%M:%S')" && git push
     else
-      printf "${RED}not on dev branch${NC}\n"
+      printf "${RED}Not on dev branch${NC}\n"
     fi
   )
 
   (
     cd $HOME/dev/QuackSnackBack
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-      printf "${CYAN}pushing to QuackSnackBack dev${NC}\n"
+      printf "${CYAN}Pushing to QuackSnackBack dev${NC}\n"
       cd $HOME/dev/QuackSnackBack && git add . && git commit -m "Push: $(date +'%d-%m-%Y %H:%M:%S')" && git push
     else
-      printf "${RED}not on dev branch${NC}\n"
+      printf "${RED}Not on dev branch${NC}\n"
     fi
   )
 }
@@ -98,9 +98,9 @@ function qs-merge-main() {
   (
     cd $HOME/dev/QuackSnackBack && git checkout main
     if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-      printf "${CYAN}merging QuackSnackBack dev into main${NC}\n"
+      printf "${CYAN}Merging QuackSnackBack dev into main${NC}\n"
       git pull origin main && git merge dev && git push
-      printf "${CYAN}pulling QuackSnackBack dev${NC}\n"
+      printf "${CYAN}Pulling QuackSnackBack dev${NC}\n"
       git checkout dev && git pull origin main && git push
     fi
   )
@@ -108,9 +108,9 @@ function qs-merge-main() {
   (
     cd $HOME/dev/QuackSnackFront && git checkout main
     if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-      printf "${CYAN}merging QuackSnackFront dev into main${NC}\n"
+      printf "${CYAN}Merging QuackSnackFront dev into main${NC}\n"
       git pull origin main && git merge dev && git push
-      printf "${CYAN}pulling QuackSnackFront dev${NC}\n"
+      printf "${CYAN}Pulling QuackSnackFront dev${NC}\n"
       git checkout dev && git pull origin main && git push
     fi
   )
@@ -118,7 +118,7 @@ function qs-merge-main() {
 
 # Change the password of the database superuser
 function qs-pass() {
-  printf "${CYAN}configuring database${NC}\n"
+  printf "${CYAN}Configuring database${NC}\n"
   (
     sudo sed -i 's/peer/trust/g' /etc/postgresql/*/main/pg_hba.conf
     sudo sed -i 's/md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
@@ -133,9 +133,9 @@ function qs-pass() {
 
 # Create or drop the qs dabatase
 function qs-database-create() {
-  printf "${CYAN}creating database${NC}\n"
+  printf "${CYAN}Creating database${NC}\n"
   (sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD createdb $DATABASE_NAME)
-  printf "${CYAN}adding user${NC}\n"
+  printf "${CYAN}Adding user${NC}\n"
   (
     sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d $DATABASE_NAME -c "create user $DATABASE_USER with encrypted password '$DATABASE_PASSWORD';"
     sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d $DATABASE_NAME -c "grant all privileges on database $DATABASE_NAME to $DATABASE_USER;"
@@ -144,7 +144,7 @@ function qs-database-create() {
 
 # Create or drop the qs dabatase
 function qs-database-drop() {
-  printf "${CYAN}dropping database & user${NC}\n"
+  printf "${CYAN}Dropping database & user${NC}\n"
   (
     sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD psql -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$DATABASE_NAME';"
     sudo -u postgres PGPASSWORD=$DATABASE_PASSWORD dropdb $DATABASE_NAME -e
@@ -154,7 +154,7 @@ function qs-database-drop() {
 
 # Installs the global packages
 function qs-packages() {
-  printf "${CYAN}installing packages and libraries${NC}\n"
+  printf "${CYAN}Installing packages and libraries${NC}\n"
   (
     sudo apt update -y
     sudo apt upgrade -y
@@ -169,30 +169,36 @@ function qs-packages() {
 
 # Installs the local libraries for the frontend
 function qs-libs-front() {
-  printf "${CYAN}installing frontend libraries${NC}\n"
+  printf "${CYAN}Installing frontend libraries${NC}\n"
   (cd $HOME/dev/QuackSnackFront/front && npm install)
 }
 
 # Installs the local libraries for the backend
 function qs-libs-back() {
-  printf "${CYAN}installing backend libraries${NC}\n"
+  printf "${CYAN}Installing backend libraries${NC}\n"
   (qs-venv && source env/bin/activate && pip install -r requirements.txt && qs-venv)
 }
 
-# Create database or apply modifications
+# Make migrations in the database
 function qs-migrate() {
   printf "${CYAN}Making migrations${NC}\n"
-  (qs-venv && python3 manage.py makemigrations qs && python3 manage.py migrate && python3 manage.py loaddata data.json && qs-venv)
+  (qs-venv && python3 manage.py makemigrations qs && python3 manage.py migrate && qs-venv)
+}
+
+# Load base data in the database
+function qs-load-data() {
+  printf "${CYAN}Loadding data${NC}\n"
+  (qs-venv && python3 manage.py loaddata data.json && qs-venv)
 }
 
 # Remove the qs shell
 function qs-remove() {
   if [ -f $HOME/.qs-bashrc ]; then
-    printf "${CYAN}removing qs-shell${NC}\n"
+    printf "${CYAN}Removing qs-shell${NC}\n"
     rm $HOME/.qs-bashrc
     sed ':a;N;$!ba;s/\n# qs-shell installed\nsource ~\/\.qs-bashrc//g' ~/.bashrc -i
   else
-    printf "${RED}qs-shell is not installed${NC}\n"
+    printf "${RED}Qs-shell is not installed${NC}\n"
   fi
 }
 
@@ -208,9 +214,9 @@ function qs-projects() {
 # Installs the qs shell
 function qs-install() {
   if [ -f $HOME/.qs-bashrc ]; then
-    printf "${RED}qs-shell is already installed${NC}\n"
+    printf "${RED}Qs-shell is already installed${NC}\n"
     qs-remove
-    printf "${CYAN}re-installing qs-shell${NC}\n"
+    printf "${CYAN}Re-installing qs-shell${NC}\n"
     if [ -f $HOME/dev/QuackSnackBack/qs-shell.sh ]; then
       cat $HOME/dev/QuackSnackBack/qs-shell.sh >~/.qs-bashrc
     elif [ -f $HOME/dev/QuackSnackFront/qs-shell.sh ]; then
@@ -220,7 +226,7 @@ function qs-install() {
     fi
     printf "\n# qs-shell installed\nsource ~/.qs-bashrc" >>~/.bashrc
   else
-    printf "${CYAN}installing qs-shell${NC}\n"
+    printf "${CYAN}Installing qs-shell${NC}\n"
     cat $HOME/dev/QuackSnackBack/qs-shell.sh >~/.qs-bashrc
     printf "\n# qs-shell installed\nsource ~/.qs-bashrc" >>~/.bashrc
   fi
@@ -228,7 +234,7 @@ function qs-install() {
 
 # Installs all the requirements
 function qs-quick-install() {
-  printf "${CYAN}making a quick install${NC}\n"
+  printf "${CYAN}Making a quick install${NC}\n"
   (
     qs-projects
     qs-install
@@ -240,7 +246,7 @@ function qs-quick-install() {
     qs-libs-back
     qs-migrate
   )
-  printf "${CYAN}\n\n\nrun \"qs-front\" to start the frontend\nor\nrun \"qs-back\" to start the backend${NC}\n"
+  printf "${CYAN}\n\n\nRun \"qs-front\" to start the frontend\nor\nRun \"qs-back\" to start the backend${NC}\n"
 }
 
 # qs-shell end

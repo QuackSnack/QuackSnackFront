@@ -1,7 +1,11 @@
+/**
+ * UNUSED
+ */
+
 import { ReactElement } from 'react'
 import { TextField } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import QSLogoTitle from '../assets/logo/QuackLogo_Dark.png'
+import QSLogoTitle from '../asset/logo/QuackLogo_Dark.png'
 
 function Home(): ReactElement {
   const LocationTextField = styled(TextField)({

@@ -6,19 +6,17 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { Button, Divider } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
-import getCookie from '../plugins/getCookie'
-import request from '../plugins/request'
-import { reactContext } from '../plugins/context'
+import getCookie from '../plugin/getCookie'
+import request from '../plugin/request'
+import { QSContext, reactContext } from '../plugin/context'
 
 interface ChildProps {
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<string>>
 }
 
-function SignIn(props: { open: boolean; setOpen: any }): ReactElement {
-  const { open } = props
-  const { setOpen } = props
-  const context: any = useContext(reactContext)
+function SignIn({ open, setOpen }: ChildProps): ReactElement {
+  const context: QSContext = useContext(reactContext)
   const [formValue, setformValue] = useState({
     username: 'Deconsenry',
     password: 'password'

@@ -1,0 +1,8 @@
+.filterbar {
+  height: var(--filterbar-height);
+  width: 100%;
+  color: black;
+  background-color: var(--fourth-color);
+  position: fixed;
+  top: var(--navbar-height);
+}

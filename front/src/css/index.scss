@@ -5,7 +5,7 @@
 @import 'restaurant.scss';
 @import 'foodlist.scss';
 @import 'foodcard.scss';
-
+@import 'filterbar.scss';
 
 :root {
   --first-color: #3d5a80;
@@ -13,8 +13,17 @@
   --third-color: #e0fbfc;
   --accent-color: #ee6c4d;
   --fourth-color: #293241;
+  --filterbar-height: 60px;
+  --navbar-height: 80px;
+  --logo-size: 110px;
+}
+
+body {
+  background-color: white;
+  color: var(--fourth-color);
+  margin: 0;
 }
 
 .main-frame {
-  margin: 80px 2% 0 2%;
+  margin: calc(var(--logo-size) + var(--filterbar-height)) 2% 0 2%;
 }

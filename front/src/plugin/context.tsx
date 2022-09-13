@@ -1,7 +1,7 @@
 import React from 'react'
 import getCookie from './getCookie'
 
-class Context {
+class QSContext {
   CSRFToken: string
 
   userLoggedIn: string
@@ -36,6 +36,6 @@ class Context {
   }
 }
 
-const reactContext = React.createContext({})
+const reactContext = React.createContext(new QSContext())
 
-export { Context, reactContext }
+export { QSContext, reactContext }

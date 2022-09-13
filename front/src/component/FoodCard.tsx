@@ -3,26 +3,17 @@ import { Tooltip, Typography, Chip, Stack } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import { reactContext } from '../plugins/context'
+import { QSContext, reactContext } from '../plugin/context'
+import { Article } from '../interface/Article'
 
-
-function FoodCard(props: {
-  food: {
-    id: number
-    image: string
-    tag: any[]
-    name: string
-    price: number
-    description: string
-  }
-}): ReactElement {
+function FoodCard(props: { food: Article }): ReactElement {
   const { food } = props
-  const context: any = useContext(reactContext)
-  const [selected, setSelected] = useState(context.basketContent.some((item: any) => item.id === food.id))
+  const context: QSContext = useContext(reactContext)
+  const [selected, setSelected] = useState(context.basketContent.some((item: { id: number }) => item.id === food.id))
 
   const handleClick = (): void => {
     context.addBasketContent(food)
-    if (context.basketContent.some((item: any) => item.id === food.id)) {
+    if (context.basketContent.some((item: { id: number }) => item.id === food.id)) {
       setSelected(true)
     } else {
       setSelected(false)
@@ -30,12 +21,12 @@ function FoodCard(props: {
   }
 
   return (
-    <Card raised={selected} className="food-card" style={{ backgroundColor: 'var(--third-color)' }} onClick={handleClick}>
+    <Card className={selected ? 'food-card selected' : 'food-card'} style={{ backgroundColor: 'var(--third-color)' }} onClick={handleClick}>
       <CardMedia component="img" className="food-card-image" image={`/images/${food.image}`} alt="Image not working" />
       <CardContent className="food-card-content">
         <Stack direction="row" spacing={1}>
-          {food.tag.map((t: { name: string }, index: number) => (
-            <Chip key={index} label={t.name} />
+          {food.tag.map((tag: { id: number; name: string }, index:number) => (
+            <Chip key={index} label={tag.name} />
           ))}
         </Stack>
         <Typography variant="h6" className="food-card-name" component="div">

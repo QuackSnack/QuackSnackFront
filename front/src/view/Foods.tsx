@@ -1,11 +1,12 @@
 import { useState, useEffect, ReactElement } from 'react'
 import { Typography } from '@mui/material'
 import Stack from '@mui/material/Stack'
-import request from '../plugins/request'
+import request from '../plugin/request'
 import FoodList from '../component/FoodList'
+import { Restaurant } from '../interface/Restaurant'
 
-function Restaurant(): ReactElement {
-  const [restaurants, setRestaurants] = useState<any[]>([])
+function Foods(): ReactElement {
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
 
   useEffect(() => {
     request
@@ -26,7 +27,6 @@ function Restaurant(): ReactElement {
           <Typography variant="h4">{restaurant.username}</Typography>
           <Stack direction="row" spacing={2}>
             <FoodList foods={restaurant.articles} title="Articles" />
-            <FoodList foods={restaurant.menus} title="Menus" />
           </Stack>
         </div>
       ))}
@@ -34,4 +34,4 @@ function Restaurant(): ReactElement {
   )
 }
 
-export default Restaurant
+export default Foods

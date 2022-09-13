@@ -1,6 +1,6 @@
 import { useContext, ReactElement } from 'react'
 import { Drawer, Typography, Divider } from '@mui/material'
-import { reactContext } from '../plugins/context'
+import { QSContext, reactContext } from '../plugin/context'
 
 interface ChildProps {
   openPanel: boolean
@@ -8,14 +8,14 @@ interface ChildProps {
 }
 
 function SettingsRightPanel({ openPanel, setOpenPanel }: ChildProps): ReactElement {
-  const context: any = useContext(reactContext)
+  const context: QSContext = useContext(reactContext)
 
   return (
     <Drawer anchor="right" open={openPanel} onClose={() => setOpenPanel('')}>
       <div className="drawer-panel">
         <Typography variant="h3">Basket</Typography>
         <Divider />
-        {context.basketContent ? context.basketContent.map((item: any) => <p key={item.id}>{item.name}</p>) : null}
+        {context.basketContent ? context.basketContent.map((item: { id: number; name: string }) => <p key={item.id}>{item.name}</p>) : null}
       </div>
     </Drawer>
   )

@@ -1,74 +1,85 @@
-body {
-  background-color: var(--fourth-color);
-  color: var(--third-color);
-  margin: 0;
-}
-
 .navbar {
   width: 100%;
-  background-color: var(--first-color);
-  height: 70px;
+  background-color: white;
+  height: var(--navbar-height);
   box-shadow: 0px -2px 5px 1px black;
   position: fixed;
   top: 0;
-}
 
-.navbar-title {
-  color: var(--third-color);
-  text-decoration: none;
-  text-align: center;
-  float: left;
-  font-size: 32px;
-  margin: 15px 0 15px 20px;
-
-  &:hover {
-    color: var(--accent-color);
+  & .search-bar {
+    width: 500px;
+    margin: 15px;
+    float: left;
   }
 
-  &.active-title {
-    border-bottom: 1px solid var(--accent-color);
-    margin-bottom: -1px;
-    color: var(--accent-color);
-  }
-}
-
-.qs-logo {
-  height: 60px;
-  margin: 5px auto 5px 25px;
-  float: left;
-
-  &:hover {
-    filter: drop-shadow(0 0 1px var(--accent-color));
-  }
-
-  &.active-qs {
-    filter: drop-shadow(0 0 1px var(--accent-color));
-  }
-}
-
-.navbar-right {
-  float: right;
-  height: 100%;
-  .navbar-logo {
-    height: 60px;
-    width: 60px;
-    margin: 5px 25px 5px auto;
+  & .navbar-title {
+    color: black;
     text-decoration: none;
-    color: var(--third-color);
-    cursor: pointer;
+    text-align: center;
+    float: left;
+    font-size: 24px;
+    margin: 33px 0 15px 20px;
 
     &:hover {
       color: var(--accent-color);
     }
 
-    &.active-logo {
+    & .active-title {
+      border-bottom: 1px solid var(--accent-color);
+      margin-bottom: -1px;
       color: var(--accent-color);
+    }
+  }
+
+  & .logo-background {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    border-radius: calc(var(--logo-size) / 2);
+    background: white;
+    margin: -4px calc(50% - var(--logo-size) / 2) 0px calc(50% - var(--logo-size) / 2);
+    position: absolute;
+    top: 0;
+    z-index: 1;
+
+    & .qs-logo {
+      height: calc(var(--logo-size) - 20px);
+      float: left;
+      margin: 10px 0px 0px -78px;
+
+      &:hover {
+        filter: drop-shadow(0 0 1px var(--accent-color));
+      }
+
+      & .active-qs {
+        filter: drop-shadow(0 0 1px var(--accent-color));
+      }
+    }
+  }
+
+  & .navbar-right {
+    float: right;
+    height: 100%;
+    & .navbar-logo {
+      height: 40px;
+      width: 40px;
+      margin: 30px 25px 5px auto;
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--accent-color);
+      }
+
+      & .active-logo {
+        color: var(--accent-color);
+      }
     }
   }
 }
 
 .sign-button-group {
-  margin-top: 18px;
+  margin-top: 33px;
   float: left;
   & button {
     margin-right: 15px;

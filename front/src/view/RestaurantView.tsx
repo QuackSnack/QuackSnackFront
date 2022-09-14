@@ -5,7 +5,7 @@ import request from '../plugin/request'
 import FoodList from '../component/FoodList'
 import { Restaurant } from '../interface/Restaurant'
 
-function Foods(): ReactElement {
+function RestaurantView(): ReactElement {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
 
   useEffect(() => {
@@ -34,4 +34,4 @@ function Foods(): ReactElement {
   )
 }
 
-export default Foods
+export default RestaurantView

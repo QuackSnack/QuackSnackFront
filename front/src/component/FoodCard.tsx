@@ -12,7 +12,7 @@ function FoodCard(props: { food: Article }): ReactElement {
   const [selected, setSelected] = useState(context.basketContent.some((item: { id: number }) => item.id === food.id))
 
   const handleClick = (): void => {
-    context.addBasketContent(food)
+    context.handleBasketContent(food)
     if (context.basketContent.some((item: { id: number }) => item.id === food.id)) {
       setSelected(true)
     } else {

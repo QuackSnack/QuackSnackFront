@@ -1,11 +1,12 @@
 @import 'navbar.scss';
 @import 'rightpanel.scss';
-@import 'home.scss';
+@import 'userview.scss';
+@import 'restaurantview.scss';
 @import 'signmodals.scss';
-@import 'restaurant.scss';
 @import 'foodlist.scss';
 @import 'foodcard.scss';
 @import 'filterbar.scss';
+@import 'noapiresponse.scss';
 
 :root {
   --first-color: #3d5a80;

@@ -6,11 +6,14 @@ class QSContext {
 
   userLoggedIn: string
 
+  userData: any
+
   basketContent: any
 
   constructor() {
     this.CSRFToken = getCookie('X-CSRFToken')
     this.userLoggedIn = localStorage.getItem('userLoggedIn')
+    this.userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {}
     this.basketContent = localStorage.getItem('basketContent') ? JSON.parse(localStorage.getItem('basketContent')) : []
   }
 
@@ -18,7 +21,11 @@ class QSContext {
     localStorage.setItem('userLoggedIn', state)
   }
 
-  addBasketContent(item: { id: number; name: string }): void {
+  setUserData(user: object): void {
+    localStorage.setItem('userData', JSON.stringify(user))
+  }
+
+  handleBasketContent(item: { id: number; name: string }): void {
     const currentBasket: any = this.basketContent
     const alreadyExists = currentBasket.findIndex((object: { id: number; name: string }) => object.id === item.id)
     if (alreadyExists === -1) {

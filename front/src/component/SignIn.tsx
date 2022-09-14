@@ -33,9 +33,10 @@ function SignIn({ open, setOpen }: ChildProps): ReactElement {
     event.preventDefault()
     request
       .post('sign-in/', formValue)
-      .then(() => {
+      .then((res) => {
         setOpen('')
         context.setUserLoggedIn('1')
+        context.setUserData(res.data.user)
         window.location.reload()
       })
       .catch((err) => {

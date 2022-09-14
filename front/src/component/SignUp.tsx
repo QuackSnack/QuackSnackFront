@@ -26,7 +26,7 @@ function SignUp({ open, setOpen }: ChildProps): ReactElement {
     town: '',
     country: '',
     streetName: '',
-    role: '0'
+    role: 0
   })
 
   const handleChange = (event: { target: { name: string; value: string } }): void => {

@@ -60,7 +60,7 @@ function NavBar(): ReactElement {
         }}
         className="search-bar"
         options={restaurants.map((restaurant) => restaurant.username)}
-        renderInput={(params) => <TextField {...params} label="Search for a restaurant . . ." />}
+        renderInput={(params) => <TextField {...params} variant="standard" label="Search for a restaurant . . ." />}
       />
       <div className="logo-background">
         <Link to="/">

@@ -36,7 +36,7 @@ function NavBar(): ReactElement {
   useEffect(() => {
     if (openSearch) {
       request
-        .post('get-all/restaurant/')
+        .get('get/restaurant/')
         .then((res) => {
           setRestaurants(res.data.data)
         })

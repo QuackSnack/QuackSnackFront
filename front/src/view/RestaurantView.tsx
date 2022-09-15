@@ -10,7 +10,7 @@ function RestaurantView(): ReactElement {
 
   useEffect(() => {
     request
-      .get('get-all/restaurant/')
+      .get('get/restaurant-and-articles/')
       .then((res) => {
         setRestaurants(res.data.data)
       })

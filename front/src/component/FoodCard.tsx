@@ -1,10 +1,12 @@
 import { useContext, useState, ReactElement } from 'react'
-import { Tooltip, Typography, Chip, Stack } from '@mui/material'
+import { Tooltip, Typography, Chip, Stack, Fab } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import { QSContext, reactContext } from '../plugin/context'
 import { Article } from '../interface/Article'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
 
 function FoodCard(props: { food: Article }): ReactElement {
   const { food } = props
@@ -21,11 +23,16 @@ function FoodCard(props: { food: Article }): ReactElement {
   }
 
   return (
-    <Card className={selected ? 'food-card selected' : 'food-card'} style={{ backgroundColor: 'var(--third-color)' }} onClick={handleClick}>
+    <Card className="food-card" style={{ backgroundColor: 'var(--third-color)' }}>
       <CardMedia component="img" className="food-card-image" image={`/images/${food.image}`} alt="Image not working" />
+      {context.userLoggedIn === '1' ? (
+        <Fab size="small" sx={{ zIndex: 1 }} color="primary" onClick={handleClick} aria-label="add">
+          {selected ? <RemoveIcon /> : <AddIcon />}
+        </Fab>
+      ) : null}
       <CardContent className="food-card-content">
         <Stack direction="row" spacing={1}>
-          {food.tag.map((tag: { id: number; name: string }, index:number) => (
+          {food.tag.map((tag: { id: number; name: string }, index: number) => (
             <Chip key={index} label={tag.name} />
           ))}
         </Stack>

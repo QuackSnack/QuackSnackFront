@@ -5,6 +5,7 @@
   box-shadow: 0px -2px 5px 1px black;
   position: fixed;
   top: 0;
+  z-index: 10;
 
   & .search-bar {
     width: 500px;

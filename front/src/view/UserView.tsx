@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import request from '../plugin/request'
 import { QSContext, reactContext } from '../plugin/context'
 import getCookie from '../plugin/getCookie'
-import { Button, Divider, Stack, Typography } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 
 function UserView(): ReactElement {
   const context: QSContext = useContext(reactContext)
@@ -22,21 +22,21 @@ function UserView(): ReactElement {
 
   useEffect(() => {
     request
-      .get(`get-single/user/${context.userData.id as string}/`)
+      .get(`get/user/${context.userData.id as string}/`)
       .then((res) => {
         console.log(res)
         setUser({
           ...user,
-          email: res.data.email,
-          username: res.data.username,
+          email: res.data.data.email,
+          username: res.data.data.username,
           currentPassword: '',
           newPassword: '',
           repeatedNewPassword: '',
-          firstName: res.data.first_name,
-          lastName: res.data.last_name,
-          town: res.data.town,
-          country: res.data.country,
-          streetName: res.data.street
+          firstName: res.data.data.first_name,
+          lastName: res.data.data.last_name,
+          town: res.data.data.town,
+          country: res.data.data.country,
+          streetName: res.data.data.street
         })
       })
       .catch((err) => {
@@ -54,7 +54,7 @@ function UserView(): ReactElement {
   const handleSubmit = (event: any): void => {
     event.preventDefault()
     request
-      .post(`modify-single/user/${context.userData.id as string}/`, user)
+      .post(`modify/user/${context.userData.id as string}/`, user)
       .then((res) => {
         console.log(res)
       })
@@ -67,6 +67,7 @@ function UserView(): ReactElement {
   return (
     <div className="main-frame">
       <form onSubmit={handleSubmit}>
+        <input type="hidden" name="csrfmiddlewaretoken" value={getCookie('X-CSRFToken')} />
         <Stack spacing={2} direction="row" className="data-display">
           <Stack spacing={2} className="data-display">
             <TextField label="Email" name="email" variant="standard" value={user.email} type="email" onChange={handleChange} />

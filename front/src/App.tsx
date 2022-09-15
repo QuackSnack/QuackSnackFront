@@ -31,14 +31,11 @@ function App(): ReactElement {
 
   useEffect(() => {
     Ping()
-    console.log('here')
     const interval = setInterval(() => {
-      if (!apiResponse) {
         Ping()
-      }
-    }, 3000)
+    }, 10000)
     return () => clearInterval(interval)
-  }, [apiResponse])
+  }, [])
 
   const context = useMemo(() => new QSContext(), [])
 

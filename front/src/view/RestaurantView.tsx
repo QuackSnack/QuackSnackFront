@@ -1,16 +1,15 @@
 import { useState, useEffect, ReactElement } from 'react'
-import { Typography } from '@mui/material'
-import Stack from '@mui/material/Stack'
+import {useParams} from "react-router-dom"
 import request from '../plugin/request'
-import FoodList from '../component/FoodList'
 import { Restaurant } from '../interface/Restaurant'
 
 function RestaurantView(): ReactElement {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
+	const {restaurantId} = useParams()
 
   useEffect(() => {
     request
-      .get('get/restaurant-and-articles/')
+      .get(`get/restaurant/${restaurantId}`)
       .then((res) => {
         setRestaurants(res.data.data)
       })
@@ -22,14 +21,8 @@ function RestaurantView(): ReactElement {
 
   return (
     <div className="main-frame">
-      {restaurants.map((restaurant) => (
-        <div key={restaurant.id}>
-          <Typography variant="h4">{restaurant.username}</Typography>
-          <Stack direction="row" spacing={2}>
-            <FoodList foods={restaurant.articles} title="Articles" />
-          </Stack>
-        </div>
-      ))}
+      <h1>Restaurant</h1>
+			{restaurantId}
     </div>
   )
 }

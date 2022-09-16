@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useState } from 'react'
+import { FormEvent, ReactElement, useState } from 'react'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import getCookie from '../plugin/getCookie'
 import request from '../plugin/request'
-import { QSContext, reactContext } from '../plugin/context'
+import { useCurrentContext } from '../plugin/context'
 
 interface ChildProps {
   open: boolean
@@ -16,7 +16,7 @@ interface ChildProps {
 }
 
 function SignIn({ open, setOpen }: ChildProps): ReactElement {
-  const context: QSContext = useContext(reactContext)
+  const { setUserData, userValid, checkUser } = useCurrentContext()
   const [formValue, setformValue] = useState({
     username: 'McDonalds',
     password: 'password'
@@ -29,14 +29,13 @@ function SignIn({ open, setOpen }: ChildProps): ReactElement {
     })
   }
 
-  const handleSubmit = (event: any): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     request
       .post('sign-in/', formValue)
       .then((res) => {
         setOpen('')
-        context.setUserLoggedIn('1')
-        context.setUserData(res.data.user)
+        setUserData(res.data.user)
         window.location.reload()
       })
       .catch((err) => {

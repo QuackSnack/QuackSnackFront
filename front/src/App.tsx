@@ -1,11 +1,12 @@
-import { ReactElement, useEffect, useMemo, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { QSContext, reactContext } from './plugin/context'
+import { ContextProvider } from './plugin/context'
 import NavBar from './component/NavBar'
-import Foods from './view/RestaurantView'
+import Home from './view/HomeView'
 import User from './view/UserView'
 import request from './plugin/request'
 import NoApiResponse from './view/NoApiResponseView'
+import Restaurant from './view/RestaurantView'
 
 function App(): ReactElement {
   const [apiResponse, setApiResponse] = useState(true)
@@ -32,25 +33,26 @@ function App(): ReactElement {
   useEffect(() => {
     Ping()
     const interval = setInterval(() => {
+      if (!apiResponse) {
         Ping()
+      }
     }, 10000)
     return () => clearInterval(interval)
   }, [])
 
-  const context = useMemo(() => new QSContext(), [])
-
   if (apiResponse) {
     return (
       <div>
-        <reactContext.Provider value={context}>
+        <ContextProvider>
           <BrowserRouter>
             <NavBar />
             <Routes>
-              <Route path="/" element={<Foods />} />
+              <Route path="/" element={<Home />} />
               <Route path="/user" element={<User />} />
+              <Route path="/restaurant/:restaurantId" element={<Restaurant />} />
             </Routes>
           </BrowserRouter>
-        </reactContext.Provider>
+        </ContextProvider>
       </div>
     )
   } else if (!apiResponse) {

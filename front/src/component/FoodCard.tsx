@@ -1,31 +1,35 @@
-import { useContext, useState, ReactElement } from 'react'
+import { useState, ReactElement, useEffect } from 'react'
 import { Tooltip, Typography, Chip, Stack, Fab } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import { QSContext, reactContext } from '../plugin/context'
+import { useCurrentContext } from '../plugin/context'
 import { Article } from '../interface/Article'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 
 function FoodCard(props: { food: Article }): ReactElement {
   const { food } = props
-  const context: QSContext = useContext(reactContext)
-  const [selected, setSelected] = useState(context.basketContent.some((item: { id: number }) => item.id === food.id))
+  const { userValid, checkUser, basketContent, handleBasketContent } = useCurrentContext()
+  const [selected, setSelected] = useState(basketContent.some((item: { id: number }) => item.id === food.id))
 
   const handleClick = (): void => {
-    context.handleBasketContent(food)
-    if (context.basketContent.some((item: { id: number }) => item.id === food.id)) {
+    handleBasketContent(food)
+    if (basketContent.some((item: { id: number }) => item.id === food.id)) {
       setSelected(true)
     } else {
       setSelected(false)
     }
   }
 
+  useEffect(() => {
+    checkUser()
+    }, [])
+
   return (
     <Card className="food-card" style={{ backgroundColor: 'var(--third-color)' }}>
       <CardMedia component="img" className="food-card-image" image={`/images/${food.image}`} alt="Image not working" />
-      {context.userLoggedIn === '1' ? (
+      {userValid ? (
         <Fab size="small" sx={{ zIndex: 1 }} color="primary" onClick={handleClick} aria-label="add">
           {selected ? <RemoveIcon /> : <AddIcon />}
         </Fab>

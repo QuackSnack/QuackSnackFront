@@ -1,11 +1,11 @@
-import { ReactElement, useContext, useState, useEffect } from 'react'
+import { ReactElement, useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Autocomplete, TextField } from '@mui/material'
+import { Autocomplete, Snackbar, TextField } from '@mui/material'
 import { ManageAccounts, Settings, LogoutOutlined, ShoppingBasketOutlined, Search } from '@mui/icons-material'
 import Button from '@mui/material/Button'
 import SettingsRightPanel from './SettingsRightPanel'
 import BasketRightPanel from './BasketRightPanel'
-import { QSContext, reactContext } from '../plugin/context'
+import { useCurrentContext } from '../plugin/context'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import QuackSnack from '../asset/logo/QuackLogo.png'
@@ -18,14 +18,13 @@ function NavBar(): ReactElement {
   const [openModal, setOpenModal] = useState('')
   const [openSearch, setOpenSearch] = useState(false)
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
-  const context: QSContext = useContext(reactContext)
+  const { userValid, checkUser, setUserData, snackBarMessage } = useCurrentContext()
 
   const logout = (): void => {
     request
       .post('log-out/')
       .then((res) => {
-        console.log(res)
-        context.setUserLoggedIn('0')
+        setUserData(null)
         window.location.reload()
       })
       .catch((err) => {
@@ -34,6 +33,7 @@ function NavBar(): ReactElement {
   }
 
   useEffect(() => {
+    checkUser()
     if (openSearch) {
       request
         .get('get/restaurant/')
@@ -67,7 +67,7 @@ function NavBar(): ReactElement {
           <img src={QuackSnack} className={useLocation().pathname === '/' ? 'qs-logo active-qs' : 'qs-logo'} />
         </Link>
       </div>
-      {context.userLoggedIn === '1' ? (
+      {userValid ? (
         <div className="navbar-right">
           <Link to="/user">
             <ManageAccounts className={useLocation().pathname === '/user' ? 'navbar-logo active-logo' : 'navbar-logo'} />
@@ -101,6 +101,7 @@ function NavBar(): ReactElement {
         </div>
       )}
       <FilterBar />
+      <Snackbar open={snackBarMessage !== ''} message={snackBarMessage} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} />
     </nav>
   )
 }

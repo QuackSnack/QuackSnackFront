@@ -1,48 +1,81 @@
-import React from 'react'
+import React, { ReactElement, useState } from 'react'
 import getCookie from './getCookie'
+import request from './request'
 
-class QSContext {
-  CSRFToken: string
+const CurrentContext = React.createContext({})
 
-  userLoggedIn: string
+const ContextProvider = ({ children }: any): ReactElement => {
+  const CSRFToken = getCookie('X-CSRFToken')
+  const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {}
+  const basketContent = localStorage.getItem('basketContent') ? JSON.parse(localStorage.getItem('basketContent')) : []
+  const [userValid, setUserValid] = useState(true)
+  const [snackBarMessage, setSnackBarMessage] = useState('')
 
-  userData: any
-
-  basketContent: any
-
-  constructor() {
-    this.CSRFToken = getCookie('X-CSRFToken')
-    this.userLoggedIn = localStorage.getItem('userLoggedIn')
-    this.userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : {}
-    this.basketContent = localStorage.getItem('basketContent') ? JSON.parse(localStorage.getItem('basketContent')) : []
+  const setSnackBar = (message: string): void => {
+    setSnackBarMessage(message)
+    setTimeout(function () {
+      setSnackBarMessage('')
+    }, 3000)
   }
 
-  setUserLoggedIn(state: string): void {
-    localStorage.setItem('userLoggedIn', state)
+  const checkUser = (): void => {
+    if (userData !== null) {
+      if (userData.id !== null) {
+        request
+          .get(`check-user/${userData.id as string}/`)
+          .then(() => {
+            setUserValid(true)
+          })
+          .catch(() => {
+            setUserValid(false)
+          })
+      } else {
+        setUserValid(false)
+      }
+    } else {
+      setUserValid(false)
+    }
   }
 
-  setUserData(user: object): void {
+  function setUserData(user: object): void {
     localStorage.setItem('userData', JSON.stringify(user))
   }
 
-  handleBasketContent(item: { id: number; name: string }): void {
-    const currentBasket: any = this.basketContent
+  function handleBasketContent(item: { id: number; name: string }): void {
+    const currentBasket: Array<{ id: number; name: string }> = basketContent
     const alreadyExists = currentBasket.findIndex((object: { id: number; name: string }) => object.id === item.id)
     if (alreadyExists === -1) {
       currentBasket.push({
         id: item.id,
         name: item.name
       })
-      console.log(currentBasket)
       localStorage.setItem('basketContent', JSON.stringify(currentBasket))
     } else {
       currentBasket.splice(alreadyExists, 1)
-      console.log(currentBasket)
       localStorage.setItem('basketContent', JSON.stringify(currentBasket))
     }
   }
+
+  return (
+    <CurrentContext.Provider
+      value={{
+        CSRFToken,
+        userData,
+        basketContent,
+        userValid,
+        setUserValid,
+        checkUser,
+        handleBasketContent,
+        setUserData,
+        snackBarMessage,
+        setSnackBar
+      }}
+    >
+      {children}
+    </CurrentContext.Provider>
+  )
 }
 
-const reactContext = React.createContext(new QSContext())
+const useCurrentContext = (): any => React.useContext(CurrentContext)
 
-export { QSContext, reactContext }
+export { useCurrentContext, ContextProvider, CurrentContext }

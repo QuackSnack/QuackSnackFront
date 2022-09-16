@@ -1,28 +1,33 @@
 import { useState, useEffect, ReactElement } from 'react'
-import {useParams} from "react-router-dom"
+import { useParams } from 'react-router-dom'
 import request from '../plugin/request'
 import { Restaurant } from '../interface/Restaurant'
+import { useCurrentContext } from '../plugin/context'
 
 function RestaurantView(): ReactElement {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
-	const {restaurantId} = useParams()
+  const { setSnackBar } = useCurrentContext()
+  const [restaurant, setRestaurant] = useState({
+    username: ''
+  })
+  const { restaurantId } = useParams()
 
   useEffect(() => {
     request
-      .get(`get/restaurant/${restaurantId}`)
+      .get(`get/restaurant/${restaurantId}/`)
       .then((res) => {
-        setRestaurants(res.data.data)
+        console.log(res.data.data)
+        setRestaurant(res.data.data)
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err)
+        setSnackBar(err.response.data.message)
       })
   }, [])
 
   return (
     <div className="main-frame">
       <h1>Restaurant</h1>
-			{restaurantId}
+      <h1>{restaurantId}</h1>
+      <h1>{restaurant.username}</h1>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { ReactElement, useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Autocomplete, Snackbar, TextField } from '@mui/material'
+import { Autocomplete, Slide, Snackbar, TextField } from '@mui/material'
 import { ManageAccounts, Settings, LogoutOutlined, ShoppingBasketOutlined, Search } from '@mui/icons-material'
 import Button from '@mui/material/Button'
 import SettingsRightPanel from './SettingsRightPanel'
@@ -13,22 +13,29 @@ import request from '../plugin/request'
 import FilterBar from './FilterBar'
 import { Restaurant } from '../interface/Restaurant'
 
+function TransitionLeft(props: any): ReactElement {
+  return <Slide {...props} direction="up" />
+}
+
 function NavBar(): ReactElement {
   const [openPanel, setOpenPanel] = useState('')
   const [openModal, setOpenModal] = useState('')
   const [openSearch, setOpenSearch] = useState(false)
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
-  const { userValid, checkUser, setUserData, snackBarMessage } = useCurrentContext()
+  const { userValid, setSnackBar, checkUser, setUserData, snackBarMessage } = useCurrentContext()
 
   const logout = (): void => {
     request
       .post('log-out/')
       .then((res) => {
         setUserData(null)
-        window.location.reload()
+        setSnackBar(res.data.message)
+        setTimeout(function () {
+          window.location.reload()
+        }, 3000)
       })
       .catch((err) => {
-        console.log(err)
+        setSnackBar(err.response.data.message)
       })
   }
 
@@ -41,7 +48,7 @@ function NavBar(): ReactElement {
           setRestaurants(res.data.data)
         })
         .catch((err) => {
-          console.log(err)
+          setSnackBar(err.response.data.message)
         })
     }
   }, [openSearch])
@@ -101,7 +108,7 @@ function NavBar(): ReactElement {
         </div>
       )}
       <FilterBar />
-      <Snackbar open={snackBarMessage !== ''} message={snackBarMessage} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} />
+      <Snackbar TransitionComponent={TransitionLeft} open={snackBarMessage !== ''} message={snackBarMessage} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} />
     </nav>
   )
 }

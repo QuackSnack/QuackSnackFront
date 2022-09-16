@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 import getCookie from '../plugin/getCookie'
 import request from '../plugin/request'
+import { useCurrentContext } from '../plugin/context'
 
 interface ChildProps {
   open: boolean
@@ -16,6 +17,7 @@ interface ChildProps {
 }
 
 function SignUp({ open, setOpen }: ChildProps): ReactElement {
+  const { setSnackBar } = useCurrentContext()
   const [formValue, setformValue] = useState({
     email: '',
     username: '',
@@ -44,8 +46,7 @@ function SignUp({ open, setOpen }: ChildProps): ReactElement {
         setOpen('')
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err)
+        setSnackBar(err.response.data.message)
       })
   }
 

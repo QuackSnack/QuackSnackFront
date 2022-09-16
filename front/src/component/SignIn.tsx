@@ -16,7 +16,7 @@ interface ChildProps {
 }
 
 function SignIn({ open, setOpen }: ChildProps): ReactElement {
-  const { setUserData, userValid, checkUser } = useCurrentContext()
+  const { setUserData, setSnackBar } = useCurrentContext()
   const [formValue, setformValue] = useState({
     username: 'McDonalds',
     password: 'password'
@@ -36,11 +36,13 @@ function SignIn({ open, setOpen }: ChildProps): ReactElement {
       .then((res) => {
         setOpen('')
         setUserData(res.data.user)
-        window.location.reload()
+        setSnackBar(res.data.message)
+        setTimeout(function () {
+          window.location.reload()
+        }, 3000)
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err)
+        setSnackBar(err.response.data.message)
       })
   }
 

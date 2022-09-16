@@ -42,7 +42,7 @@ function UserView(): ReactElement {
           })
         })
         .catch((err) => {
-          console.log(err)
+          setSnackBar(err.response.data.message)
         })
     }
   }, [])
@@ -60,10 +60,12 @@ function UserView(): ReactElement {
       .post(`modify/user/${userData.id as string}/`, user)
       .then((res) => {
         setSnackBar(res.data.message)
+        setTimeout(function () {
+          window.location.reload()
+        }, 3000)
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err)
+        setSnackBar(err.response.data.message)
       })
   }
 

@@ -24,7 +24,7 @@ function qs-back() {
   if service postgresql status | grep -Fq 'down'; then
     sudo service postgresql start
   fi
-  (cd $HOME/dev/QuackSnackBack/back && source env/bin/activate && python3 manage.py runserver)
+  (qs-venv && python3 manage.py runserver)
 }
 
 # Turn on/off the backend's environment
@@ -44,7 +44,7 @@ function qs-superuser() {
   export DJANGO_SUPERUSER_USERNAME
   export DJANGO_SUPERUSER_PASSWORD
   export DJANGO_SUPERUSER_EMAIL
-  (cd $HOME/dev/QuackSnackBack/back && source env/bin/activate && ./manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL)
+  (qs-venv && ./manage.py createsuperuser --noinput --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL)
 }
 
 # Pull the changes of both projects
@@ -96,22 +96,30 @@ function qs-push-dev() {
 # Update the main branch of both projects based on the dev
 function qs-merge-main() {
   (
+    if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
     cd $HOME/dev/QuackSnackBack && git checkout main
-    if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-      printf "${CYAN}Merging QuackSnackBack dev into main${NC}\n"
-      git pull origin main && git merge dev && git push
-      printf "${CYAN}Pulling QuackSnackBack dev${NC}\n"
-      git checkout dev && git pull origin main && git push
+      if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
+        printf "${CYAN}Merging QuackSnackBack dev into main${NC}\n"
+        git pull origin main && git merge dev && git push
+        printf "${CYAN}Pulling QuackSnackBack dev${NC}\n"
+        git checkout dev && git pull origin main && git push
+      fi
+    else
+      printf "${RED}Not on dev branch${NC}\n"
     fi
   )
 
   (
+    if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
     cd $HOME/dev/QuackSnackFront && git checkout main
-    if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-      printf "${CYAN}Merging QuackSnackFront dev into main${NC}\n"
-      git pull origin main && git merge dev && git push
-      printf "${CYAN}Pulling QuackSnackFront dev${NC}\n"
-      git checkout dev && git pull origin main && git push
+      if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
+        printf "${CYAN}Merging QuackSnackFront dev into main${NC}\n"
+        git pull origin main && git merge dev && git push
+        printf "${CYAN}Pulling QuackSnackFront dev${NC}\n"
+        git checkout dev && git pull origin main && git push
+      fi
+    else
+      printf "${RED}Not on dev branch${NC}\n"
     fi
   )
 }
@@ -160,6 +168,7 @@ function qs-packages() {
     sudo apt upgrade -y
     sudo apt install -y python3 python3-pip python3-venv postgresql postgresql-contrib libpq-dev nodejs npm
     sudo service postgresql start
+    sudo pip install virtualenv
     sudo npm install -g n
     sudo n stable
     sudo n prune
@@ -176,7 +185,7 @@ function qs-libs-front() {
 # Installs the local libraries for the backend
 function qs-libs-back() {
   printf "${CYAN}Installing backend libraries${NC}\n"
-  (qs-venv && source env/bin/activate && pip install -r requirements.txt && qs-venv)
+  (cd $HOME/dev/QuackSnackBack/back && virtualenv env && source env/bin/activate && pip install -r requirements.txt)
 }
 
 # Make migrations in the database
@@ -241,9 +250,9 @@ function qs-quick-install() {
     qs-packages
     qs-pass
     qs-database-create
-    qs-superuser
     qs-libs-front
     qs-libs-back
+    qs-superuser
     qs-migrate
   )
   printf "${CYAN}\n\n\nRun \"qs-front\" to start the frontend\nor\nRun \"qs-back\" to start the backend${NC}\n"

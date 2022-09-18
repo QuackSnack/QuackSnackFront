@@ -1,7 +1,7 @@
 # Description
 
 <p align="center">
-  <img src="https://github.com/QuackSnack/QuackSnackFront/blob/main/front/src/assets/logo/QuackLogo_Dark.png?raw=true" alt="Quack Snack Logo"/>
+  <img src="https://github.com/QuackSnack/QuackSnackFront/blob/main/front/src/asset/logo/QuackLogo_Dark.png?raw=true" alt="Quack Snack Logo"/>
 </p>
 
 This project contains the frontend of a web-application called **QuackSnack** *(for a quick snack)* that propose the typical services of any food chain. It is made purely as an educationnal purpose.
@@ -68,18 +68,3 @@ LICENSE
 qs-shell.sh
 README.md
 ```
-
-## TODO
-
-```
-Frontend
-  Language swapping
-  Theme swapping
-  Restaurant interface
-  Redirect users not logged in
-
-Backend
-  Restaurant logic
-  Django authentification
-```
-

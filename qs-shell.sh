@@ -252,8 +252,8 @@ function qs-quick-install() {
     qs-database-create
     qs-libs-front
     qs-libs-back
-    qs-superuser
     qs-migrate
+    qs-superuser
   )
   printf "${CYAN}\n\n\nRun \"qs-front\" to start the frontend\nor\nRun \"qs-back\" to start the backend${NC}\n"
 }

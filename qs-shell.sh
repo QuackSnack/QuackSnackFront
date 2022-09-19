@@ -97,7 +97,7 @@ function qs-push-dev() {
 function qs-merge-main() {
   (
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-    cd $HOME/dev/QuackSnackBack && git checkout main
+      cd $HOME/dev/QuackSnackBack && git checkout main
       if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
         printf "${CYAN}Merging QuackSnackBack dev into main${NC}\n"
         git pull origin main && git merge dev && git push
@@ -111,7 +111,7 @@ function qs-merge-main() {
 
   (
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-    cd $HOME/dev/QuackSnackFront && git checkout main
+      cd $HOME/dev/QuackSnackFront && git checkout main
       if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
         printf "${CYAN}Merging QuackSnackFront dev into main${NC}\n"
         git pull origin main && git merge dev && git push
@@ -253,6 +253,7 @@ function qs-quick-install() {
     qs-libs-front
     qs-libs-back
     qs-migrate
+    qs-load-data
     qs-superuser
   )
   printf "${CYAN}\n\n\nRun \"qs-front\" to start the frontend\nor\nRun \"qs-back\" to start the backend${NC}\n"

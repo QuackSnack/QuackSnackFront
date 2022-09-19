@@ -7,6 +7,7 @@ import { useCurrentContext } from '../plugin/context'
 import { Article } from '../interface/Article'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
+import { Link } from 'react-router-dom'
 
 function FoodCard(props: { food: Article }): ReactElement {
   const { food } = props
@@ -40,17 +41,17 @@ function FoodCard(props: { food: Article }): ReactElement {
             <Chip key={index} label={tag.name} />
           ))}
         </Stack>
+        <Link to={`/article/${food.id}`}>
         <Typography variant="h6" className="food-card-name" component="div">
           {food.name}
         </Typography>
+        </Link>
         <Typography variant="h6" className="food-card-price" component="div">
           {food.price} €
         </Typography>
-        <Tooltip title={<Typography variant="subtitle1">{food.description}</Typography>} arrow>
           <Typography variant="body2" className="food-card-description" color="text.secondary">
             {food.description}
           </Typography>
-        </Tooltip>
       </CardContent>
     </Card>
   )

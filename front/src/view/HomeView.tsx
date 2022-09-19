@@ -18,6 +18,7 @@ function HomeView(): ReactElement {
         setRestaurants(res.data.data)
       })
       .catch((err) => {
+        console.log(err)
         setSnackBar(err.response.data.message)
       })
   }, [])

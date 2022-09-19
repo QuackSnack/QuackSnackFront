@@ -3,19 +3,19 @@ import { useParams } from 'react-router-dom'
 import request from '../plugin/request'
 import { useCurrentContext } from '../plugin/context'
 
-function RestaurantView(): ReactElement {
+function ArticleView(): ReactElement {
   const { setSnackBar } = useCurrentContext()
-  const [restaurant, setRestaurant] = useState({
-    username: ''
+  const [article, setarticle] = useState({
+    name: ''
   })
-  const { restaurantId } = useParams()
+  const { articleId } = useParams()
 
   useEffect(() => {
     request
-      .get(`get/restaurant/${restaurantId}/`)
+      .get(`get/article/${articleId}/`)
       .then((res) => {
         console.log(res.data.data)
-        setRestaurant(res.data.data)
+        setarticle(res.data.data)
       })
       .catch((err) => {
         setSnackBar(err.response.data.message)
@@ -24,11 +24,11 @@ function RestaurantView(): ReactElement {
 
   return (
     <div className="main-frame">
-      <h1>Restaurant</h1>
-      <h1>{restaurantId}</h1>
-      <h1>{restaurant.username}</h1>
+      <h1>Article</h1>
+      <h1>{articleId}</h1>
+      <h1>{article.name}</h1>
     </div>
   )
 }
 
-export default RestaurantView
+export default ArticleView

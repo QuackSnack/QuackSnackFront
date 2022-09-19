@@ -10,24 +10,36 @@ Click here to see the [backend](https://github.com/QuackSnack/QuackSnackBack).
 
 # Setup
 
-This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `/home/user/dev/QuackSnackFront`.
+This setup was made on a Debian 11 distro, using the Windows 11 WSL. The project is placed in `$HOME/dev/QuackSnackFront`.
 
 ***WARNING : It is highly recommended to set this up on an empty distribution as it will probably mess with your current packages, libraries and database system.***
 
 ## Shell
 
-To facilitate the setup and project management, a shell called `qs-shell` is proposed in both projects. The following commands create a folder, pull the project inside of it, then make a quick install with the shell :
+To facilitate the setup and project management, a shell called `qs-shell` is proposed in both projects. The first step is to create an SSH key and associate it to your GitHub profile. The following command will generate an SSH key :
 
 ```bash
-cd && \
-mkdir dev && \
+ssh-keygen -t rsa -b 4096
+```
+
+The following command displays the content of your key. Copy it and add it to your [GitHub account](https://github.com/settings/keys) :
+
+```bash
+cat /home/ghue/.ssh/id_rsa.pub
+```
+
+Assuming your GitHub account has the rights to work on these projects, you should now be able to execute the following command, which installs the shell and setup both projects :
+
+```bash
+cd $HOME && \
+sudo mkdir dev && \
 cd dev && \
 git clone git@github.com:QuackSnack/QuackSnackFront.git && \
 cd QuackSnackFront && \
 source qs-shell.sh; qs-quick-install
 ```
 
-This will install the shell in your `~/.bashrc` file. Here is an overview of the commands that the shell proposes :
+Here is an overview of the commands that the shell proposes :
 
 * `qs-install` : Install the shell.
 * `qs-remove` : Remove the shell.

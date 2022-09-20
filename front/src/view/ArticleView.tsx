@@ -6,7 +6,13 @@ import { useCurrentContext } from '../plugin/context'
 function ArticleView(): ReactElement {
   const { setSnackBar } = useCurrentContext()
   const [article, setarticle] = useState({
-    name: ''
+    owner: 0,
+    id: 0,
+    tag: [],
+    name: '',
+    image: '',
+    price: '',
+    description: ''
   })
   const { articleId } = useParams()
 
@@ -24,9 +30,16 @@ function ArticleView(): ReactElement {
 
   return (
     <div className="main-frame">
-      <h1>Article</h1>
-      <h1>{articleId}</h1>
-      <h1>{article.name}</h1>
+      <h1>Owner ID:{article.owner}</h1>
+      <h1>ID:{article.id}</h1>
+      <h1>Tags:</h1>
+      {article.tag.map((tag: { id: number; name: string }, index: number) => (
+        <h5 key={index}>{tag.name}</h5>
+      ))}
+      <h1>Name:{article.name}</h1>
+      <h1>Price:{article.price}</h1>
+      <h1>Description:{article.description}</h1>
+      <img src={`/images/${article.image}`} alt={article.image}></img>
     </div>
   )
 }

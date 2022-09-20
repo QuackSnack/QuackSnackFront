@@ -23,10 +23,6 @@ function FoodCard(props: { food: Article }): ReactElement {
     }
   }
 
-  useEffect(() => {
-    checkUser()
-    }, [])
-
   return (
     <Card className="food-card" style={{ backgroundColor: 'var(--third-color)' }}>
       <CardMedia component="img" className="food-card-image" image={`/images/${food.image}`} alt="Image not working" />

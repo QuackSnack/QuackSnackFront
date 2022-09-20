@@ -7,4 +7,5 @@ export interface Article {
   image: string
   price: number
   description: string
+  owner: number
 }

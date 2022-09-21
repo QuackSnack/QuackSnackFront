@@ -1,4 +1,4 @@
-import { Article } from './Article'
+import { Choice } from './Choice'
 import { Tag } from './Tag'
 
 export interface Menu {
@@ -8,4 +8,6 @@ export interface Menu {
   image: string
   price: number
   description: string
+  owner: number
+  choice: Choice[]
 }

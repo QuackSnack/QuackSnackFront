@@ -7,21 +7,13 @@ import { useCurrentContext } from '../plugin/context'
 import { Article } from '../interface/Article'
 import { Link } from 'react-router-dom'
 import FoodModal from './FoodModal'
+import { Menu } from '../interface/Menu'
 
-function FoodCard(props: { food: Article }): ReactElement {
+function FoodCard(props: { food: Article | Menu }): ReactElement {
   const { food } = props
-  const { userValid, checkUser, basketContent, handleBasketContent } = useCurrentContext()
+  const { basketContent } = useCurrentContext()
   const [selected, setSelected] = useState(basketContent.some((item: { id: number }) => item.id === food.id))
   const [openModal, setOpenModal] = useState(-1)
-
-  const handleClick = (): void => {
-    handleBasketContent(food)
-    if (basketContent.some((item: { id: number }) => item.id === food.id)) {
-      setSelected(true)
-    } else {
-      setSelected(false)
-    }
-  }
 
   return (
     <div>
@@ -33,7 +25,7 @@ function FoodCard(props: { food: Article }): ReactElement {
               <Chip key={index} label={tag.name} />
             ))}
           </Stack>
-          <Link to={`/article/${food.id}`}>
+          <Link to={Object.prototype.hasOwnProperty.call(food, "choice") ? `/menu/${food.id}` : `/article/${food.id}`}>
             <Typography variant="h6" className="food-card-name" component="div">
               {food.name}
             </Typography>

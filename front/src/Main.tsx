@@ -8,6 +8,7 @@ import request from './plugin/request'
 import NoApiResponseView from './view/NoApiResponseView'
 import RestaurantView from './view/RestaurantView'
 import ArticleView from './view/ArticleView'
+import MenuView from './view/MenuView'
 
 function Main(): ReactElement {
   const [apiResponse, setApiResponse] = useState(true)
@@ -52,6 +53,7 @@ function Main(): ReactElement {
               <Route path="/user" element={<UserView />} />
               <Route path="/restaurant/:restaurantId" element={<RestaurantView />} />
               <Route path="/article/:articleId" element={<ArticleView />} />
+              <Route path="/menu/:menuId" element={<MenuView />} />
             </Routes>
           </BrowserRouter>
         </ContextProvider>

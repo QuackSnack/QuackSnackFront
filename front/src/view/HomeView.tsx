@@ -33,6 +33,9 @@ function HomeView(): ReactElement {
           <Stack direction="row" spacing={2}>
             <FoodList foods={restaurant.articles}/>
           </Stack>
+          <Stack direction="row" spacing={2}>
+            <FoodList foods={restaurant.menus}/>
+          </Stack>
         </div>
       ))}
     </div>

@@ -1,3 +1,4 @@
+import { Choice } from './Choice'
 import { Tag } from './Tag'
 
 export interface Article {
@@ -8,4 +9,5 @@ export interface Article {
   price: number
   description: string
   owner: number
+  choice?: Choice[]
 }

@@ -11,7 +11,6 @@ function FoodList(props: {id:number }): ReactElement {
     request
       .get(`get/restaurant/${id}/`)
       .then((res) => {
-        console.log(res.data.data)
         setRestaurant(res.data.data)
       })
       .catch((err) => {

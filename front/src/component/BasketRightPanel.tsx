@@ -27,7 +27,7 @@ function SettingsRightPanel({ openPanel, setOpenPanel }: ChildProps): ReactEleme
               </div>
             ))
           : null}
-          {basketContent ? <Link to="/checkout"><Button>Go to checkout</Button></Link> : null}
+          {basketContent.length > 0 ? <Link to="/checkout"><Button>Go to checkout</Button></Link> : null}
       </div>
     </Drawer>
   )

@@ -7,8 +7,11 @@ import { Button, Chip, DialogContentText, Divider, Stack } from '@mui/material'
 import { useCurrentContext } from '../plugin/context'
 import { Article } from '../interface/Article'
 import { AddCircle, RemoveCircle } from '@mui/icons-material'
+import { Menu } from '../interface/Menu'
+import { Choice } from '../interface/Choice'
+import MenuChoice from './MenuChoice'
 
-function FoodModal(props: { open: boolean; setOpen: React.Dispatch<React.SetStateAction<number>>; food: Article }): ReactElement {
+function FoodModal(props: { open: boolean; setOpen: React.Dispatch<React.SetStateAction<number>>; food: Article| Menu }): ReactElement {
   const [quantity, setQuantity] = useState(1)
   const { food } = props
   const { open } = props
@@ -38,6 +41,9 @@ function FoodModal(props: { open: boolean; setOpen: React.Dispatch<React.SetStat
           </Stack>
           <DialogContent>
             <DialogContentText>{food.description}</DialogContentText>
+            {Object.prototype.hasOwnProperty.call(food, "choice") ? (
+              <MenuChoice choice={food.choice}/>
+            ) : (null) }
           </DialogContent>
           <Divider />
           <AddCircle onClick={incrementQuantity} />

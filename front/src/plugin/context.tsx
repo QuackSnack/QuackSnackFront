@@ -41,19 +41,23 @@ const ContextProvider = ({ children }: any): ReactElement => {
     localStorage.setItem('userData', JSON.stringify(user))
   }
 
-  function handleBasketContent(item: { id: number; name: string }): void {
+  function addBasketContent(item: { id: number; name: string }, quantity: number): void {
+    const currentBasket: Array<{ id: number; name: string; quantity: number }> = basketContent
+    currentBasket.push({
+      id: item.id,
+      name: item.name,
+      quantity: quantity
+    })
+    localStorage.setItem('basketContent', JSON.stringify(currentBasket))
+  }
+
+  function removeBasketContent(item: { id: number; name: string }): void {
     const currentBasket: Array<{ id: number; name: string }> = basketContent
     const alreadyExists = currentBasket.findIndex((object: { id: number; name: string }) => object.id === item.id)
-    if (alreadyExists === -1) {
-      currentBasket.push({
-        id: item.id,
-        name: item.name
-      })
-      localStorage.setItem('basketContent', JSON.stringify(currentBasket))
-    } else {
+    if (alreadyExists >= 0) {
       currentBasket.splice(alreadyExists, 1)
-      localStorage.setItem('basketContent', JSON.stringify(currentBasket))
     }
+    localStorage.setItem('basketContent', JSON.stringify(currentBasket))
   }
 
   return (
@@ -65,8 +69,9 @@ const ContextProvider = ({ children }: any): ReactElement => {
         userValid,
         setUserValid,
         checkUser,
-        handleBasketContent,
         setUserData,
+        addBasketContent,
+        removeBasketContent,
         snackBarMessage,
         setSnackBar
       }}

@@ -48,7 +48,7 @@ function SignIn({ open, setOpen }: ChildProps): ReactElement {
 
   return (
     <div>
-      <Dialog open={open} onClose={() => setOpen('')} aria-labelledby="scroll-dialog-title" aria-describedby="scroll-dialog-description">
+      <Dialog open={open} onClose={() => setOpen('')}>
         <DialogTitle id="scroll-dialog-title">Sign in</DialogTitle>
         <Divider />
         <form onSubmit={handleSubmit}>

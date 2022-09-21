@@ -1,17 +1,14 @@
-import { useRef, ReactElement } from 'react'
+import { ReactElement } from 'react'
 import Stack from '@mui/material/Stack'
 import { Typography } from '@mui/material'
 import FoodCard from './FoodCard'
 import { Article } from '../interface/Article'
 
-function FoodList(this: ReactElement, props: { foods: (Article )[]; title: string }): ReactElement {
+function FoodList(this: ReactElement, props: { foods: Article[]}): ReactElement {
   const { foods } = props
-  const { title } = props
-  const scrollRef = useRef(null)
 
   return (
-    <div className="food-list" ref={scrollRef}>
-      <Typography variant="h5">{title}</Typography>
+    <div className="food-list" >
       <Stack direction="row" spacing={2}>
         {foods.map((food) => (
           <FoodCard key={food.id} food={food} />

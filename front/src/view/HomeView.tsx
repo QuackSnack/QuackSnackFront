@@ -31,7 +31,7 @@ function HomeView(): ReactElement {
             <Typography variant="h4">{restaurant.username} </Typography>
           </Link>
           <Stack direction="row" spacing={2}>
-            <FoodList foods={restaurant.articles} title="Articles" />
+            <FoodList foods={restaurant.articles}/>
           </Stack>
         </div>
       ))}

@@ -6,8 +6,8 @@ import Button from '@mui/material/Button'
 import SettingsRightPanel from './SettingsRightPanel'
 import BasketRightPanel from './BasketRightPanel'
 import { useCurrentContext } from '../plugin/context'
-import SignIn from './SignIn'
-import SignUp from './SignUp'
+import SignInModal from './SignInModal'
+import SignUpModal from './SignUpModal'
 import QuackSnack from '../asset/logo/QuackLogo.png'
 import request from '../plugin/request'
 import FilterBar from './FilterBar'
@@ -88,8 +88,8 @@ function NavBar(): ReactElement {
           <Settings className={openPanel ? 'navbar-logo active-logo' : 'navbar-logo'} onClick={() => setOpenPanel('settings')} />
           <SettingsRightPanel openPanel={openPanel === 'settings'} setOpenPanel={setOpenPanel} />
 
-          <SignIn open={openModal === 'signin'} setOpen={setOpenModal} />
-          <SignUp open={openModal === 'signup'} setOpen={setOpenModal} />
+          <SignInModal open={openModal === 'signin'} setOpen={setOpenModal} />
+          <SignUpModal open={openModal === 'signup'} setOpen={setOpenModal} />
         </div>
       ) : (
         <div className="navbar-right">
@@ -103,8 +103,8 @@ function NavBar(): ReactElement {
           </div>
           <Settings className={openPanel ? 'navbar-logo active-logo' : 'navbar-logo'} onClick={() => setOpenPanel('settings')} />
           <SettingsRightPanel openPanel={openPanel === 'settings'} setOpenPanel={setOpenPanel} />
-          <SignIn open={openModal === 'signin'} setOpen={setOpenModal} />
-          <SignUp open={openModal === 'signup'} setOpen={setOpenModal} />
+          <SignInModal open={openModal === 'signin'} setOpen={setOpenModal} />
+          <SignUpModal open={openModal === 'signup'} setOpen={setOpenModal} />
         </div>
       )}
       <FilterBar />

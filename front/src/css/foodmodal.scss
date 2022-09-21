@@ -1,0 +1,9 @@
+.food-modal {
+    height: 900px;
+    width: 300px;
+    padding: 16px;
+  & img {
+    width: 200px;
+    margin-left: 50px;
+  }
+}

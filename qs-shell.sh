@@ -96,12 +96,13 @@ function qs-push-dev() {
 # Update the main branch of both projects based on the dev
 function qs-merge-main() {
   (
+    cd $HOME/dev/QuackSnackFront
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-      cd $HOME/dev/QuackSnackBack && git checkout main
+      git checkout main
       if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-        printf "${CYAN}Merging QuackSnackBack dev into main${NC}\n"
+        printf "${CYAN}Merging QuackSnackFront dev into main${NC}\n"
         git pull origin main && git merge dev && git push
-        printf "${CYAN}Pulling QuackSnackBack dev${NC}\n"
+        printf "${CYAN}Pulling QuackSnackFront dev${NC}\n"
         git checkout dev && git pull origin main && git push
       fi
     else
@@ -110,12 +111,13 @@ function qs-merge-main() {
   )
 
   (
+    cd $HOME/dev/QuackSnackBack
     if [[ $(git rev-parse --abbrev-ref HEAD) == "dev" ]]; then
-      cd $HOME/dev/QuackSnackFront && git checkout main
+      git checkout main
       if [[ $(git rev-parse --abbrev-ref HEAD) == "main" ]]; then
-        printf "${CYAN}Merging QuackSnackFront dev into main${NC}\n"
+        printf "${CYAN}Merging QuackSnackBack dev into main${NC}\n"
         git pull origin main && git merge dev && git push
-        printf "${CYAN}Pulling QuackSnackFront dev${NC}\n"
+        printf "${CYAN}Pulling QuackSnackBack dev${NC}\n"
         git checkout dev && git pull origin main && git push
       fi
     else

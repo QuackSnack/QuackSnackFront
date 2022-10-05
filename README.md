@@ -25,7 +25,7 @@ ssh-keygen -t rsa -b 4096
 The following command displays the content of your key. Copy it and add it to your [GitHub account](https://github.com/settings/keys) :
 
 ```bash
-cat /home/ghue/.ssh/id_rsa.pub
+cd $HOME && cat .ssh/id_rsa.pub
 ```
 
 Assuming your GitHub account has the rights to work on these projects, you should now be able to execute the following command, which installs the shell and setup both projects :

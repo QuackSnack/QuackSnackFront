@@ -6,6 +6,10 @@
 
 This project contains the frontend of a web-application called **QuackSnack** *(for a quick snack)* that propose the typical services of any food chain. It is made purely as an educationnal purpose.
 
+<p align="center">
+  <img src="https://github.com/QuackSnack/QuackSnackFront/blob/main/screenshot.png?raw=true" alt="Quack Snack Screenshot"/>
+</p>
+
 Click here to see the [backend](https://github.com/QuackSnack/QuackSnackBack).
 
 # Setup
@@ -79,4 +83,5 @@ main/
 LICENSE
 qs-shell.sh
 README.md
+screenshot.png
 ```
